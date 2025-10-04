@@ -98,9 +98,16 @@ After successful deployment, Terraform will output:
 - CloudFront distribution ID and domain name
 - Website URL
 
-## Deploy Frontend
+## Deployment
 
-After building the frontend, deploy it to S3:
+### Automated Deployment (Recommended)
+
+Deployment is automated via GitHub Actions when pushing to the `main` branch.
+See `../.github/workflows/deploy.yml` for details.
+
+### Manual Deployment
+
+If you need to deploy manually:
 
 ```bash
 # Build the frontend
