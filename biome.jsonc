@@ -1,6 +1,18 @@
 // See: https://biomejs.dev/guides/configure-biome/
 {
   "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**/*.json", "**/*.jsonc"],
+    "experimentalScannerIgnores": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.terraform/**",
+      "**/package.json",
+      "**/package-lock.json",
+      "**/pnpm-lock.yaml",
+    ],
+  },
   "formatter": {
     "indentStyle": "space",
     "lineEnding": "lf",
