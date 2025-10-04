@@ -3,15 +3,7 @@
   "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**/*.json", "**/*.jsonc"],
-    "experimentalScannerIgnores": [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/.terraform/**",
-      "**/package.json",
-      "**/package-lock.json",
-      "**/pnpm-lock.yaml",
-    ],
+    "includes": ["**/*.json", "**/*.jsonc", "!**/node_modules", "!**/dist", "!**/.terraform", "!frontend"],
   },
   "formatter": {
     "indentStyle": "space",
