@@ -6,6 +6,8 @@ includes:
   json: tasks/JsonTasks.yml
   md: tasks/MarkdownTasks.yml
   gh: tasks/GitHubTasks.yml
+  front: tasks/FrontendTasks.yml
+  infra: tasks/InfrastructureTasks.yml
 
 tasks:
   default:
@@ -40,5 +42,7 @@ tasks:
       - json:check
       - md:check
       - gh:check
+      - front:check
+      - infra:check
     aliases:
       - c

@@ -1,0 +1,63 @@
+version: "3"
+
+tasks:
+  init:
+    desc: "Initialize Terraform"
+    dir: infrastructure
+    cmds:
+      - terraform init
+
+  check:
+    desc: "Check Terraform configuration"
+    dir: infrastructure
+    cmds:
+      - task: fmt
+      - task: validate
+
+  validate:
+    desc: "Validate Terraform configuration"
+    dir: infrastructure
+    cmds:
+      - terraform validate
+
+  fmt:
+    desc: "Format Terraform files"
+    dir: infrastructure
+    cmds:
+      - terraform fmt -recursive
+
+  plan:
+    desc: "Show Terraform execution plan"
+    dir: infrastructure
+    cmds:
+      - terraform plan
+
+  apply:
+    desc: "Apply Terraform configuration"
+    dir: infrastructure
+    cmds:
+      - terraform apply
+
+  destroy:
+    desc: "Destroy Terraform-managed infrastructure"
+    dir: infrastructure
+    cmds:
+      - terraform destroy
+
+  output:
+    desc: "Show Terraform outputs"
+    dir: infrastructure
+    cmds:
+      - terraform output
+
+  show:
+    desc: "Show Terraform state"
+    dir: infrastructure
+    cmds:
+      - terraform show
+
+  clean:
+    desc: "Clean Terraform files"
+    dir: infrastructure
+    cmds:
+      - rm -rf .terraform terraform.tfstate* .terraform.lock.hcl

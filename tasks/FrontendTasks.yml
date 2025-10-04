@@ -1,0 +1,64 @@
+version: "3"
+
+tasks:
+  install:
+    desc: "Install frontend dependencies"
+    dir: frontend
+    cmds:
+      - pnpm install
+
+  dev:
+    desc: "Start development server"
+    dir: frontend
+    cmds:
+      - pnpm dev
+
+  build:
+    desc: "Build for production"
+    dir: frontend
+    cmds:
+      - pnpm build
+
+  preview:
+    desc: "Preview production build"
+    dir: frontend
+    cmds:
+      - pnpm preview
+
+  check:
+    desc: "Check frontend (lint + type-check)"
+    dir: frontend
+    cmds:
+      - task: lint:fix
+      - task: type-check
+      - task: lint
+
+  lint:
+    desc: "Run ESLint"
+    dir: frontend
+    cmds:
+      - pnpm lint
+
+  lint:fix:
+    desc: "Run ESLint with fix"
+    dir: frontend
+    cmds:
+      - pnpm lint --fix
+
+  type-check:
+    desc: "Run TypeScript type checking"
+    dir: frontend
+    cmds:
+      - pnpm exec tsc -b
+
+  clean:
+    desc: "Clean build artifacts"
+    dir: frontend
+    cmds:
+      - rm -rf dist node_modules/.vite
+
+  add-component:
+    desc: "Add shadcn/ui component (usage: task front:add-component -- button)"
+    dir: frontend
+    cmds:
+      - pnpm dlx shadcn@latest add {{.CLI_ARGS}}
