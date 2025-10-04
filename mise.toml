@@ -15,3 +15,9 @@ shellcheck = "latest"
 
 # Other tools
 fzf = "latest"
+
+# Frontend
+pnpm = "latest"
+
+# Infrastructure
+terraform = "latest"
