@@ -11,7 +11,7 @@ tasks:
     desc: "Check Terraform configuration"
     dir: infrastructure
     cmds:
-      - task: fmt
+      - task: fix
       - task: validate
 
   validate:
@@ -25,6 +25,12 @@ tasks:
     dir: infrastructure
     cmds:
       - terraform fmt -recursive
+
+  fix:
+    desc: "Fix Terraform"
+    dir: infrastructure
+    cmds:
+      - task: fmt
 
   plan:
     desc: "Show Terraform execution plan"

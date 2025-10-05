@@ -26,10 +26,10 @@ tasks:
       - pnpm preview
 
   check:
-    desc: "Check frontend (lint + type-check)"
+    desc: "Check frontend"
     dir: frontend
     cmds:
-      - task: lint:fix
+      - task: fix
       - task: type-check
       - task: lint
 
@@ -44,6 +44,12 @@ tasks:
     dir: frontend
     cmds:
       - pnpm lint --fix
+
+  fix:
+    desc: "Fix frontend"
+    dir: frontend
+    cmds:
+      - task: lint:fix
 
   type-check:
     desc: "Run TypeScript type checking"
