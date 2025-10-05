@@ -8,6 +8,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - All code, comments, documentation, and deliverables must be written in English
 - Technical explanations can be in Japanese, but code artifacts must be in English
 
+## Important: Task Command Usage
+
+**ALWAYS use `task` commands for formatting and checks after making changes:**
+
+- After editing frontend code → `task front:check`
+- After editing infrastructure code → `task infra:check`
+- After editing YAML files → `task yml:check`
+- After editing JSON files → `task json:check`
+- After editing Markdown files → `task md:check`
+- For comprehensive checks → `task check`
+
+**DO NOT** run individual commands like `terraform fmt`, `pnpm lint`, etc. directly. Always use the corresponding `task` command to ensure consistency.
+
 ## Architecture Overview
 
 This is a personal homepage project with a **React SPA frontend** deployed to **AWS S3 + CloudFront** using **Terraform**. The project uses **Taskfile** for task automation and **mise** for tool version management.
