@@ -30,20 +30,6 @@ pnpm-debug.log*
 .env.test.local
 .env.production.local
 
-# Terraform
-*.tfstate
-*.tfstate.*
-*.tfvars
-!*.tfvars.example
-.terraform/
-.terraform.lock.hcl
-crash.log
-crash.*.log
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
 # IDE
 .vscode/*
 !.vscode/extensions.json
