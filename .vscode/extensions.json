@@ -7,5 +7,14 @@
     "EditorConfig.EditorConfig",
     "DavidAnson.vscode-markdownlint",
     "biomejs.biome",
+    "HashiCorp.terraform",
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+    "wix.vscode-import-cost",
+    "yoavbls.pretty-ts-errors",
+    "pranaygp.vscode-css-peek"
   ],
 }
