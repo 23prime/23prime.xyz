@@ -2,23 +2,30 @@
   "folders": [
     {
       "name": "Root",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "Frontend",
-      "path": "./frontend"
+      "path": "./frontend",
     },
     {
       "name": "Infrastructure",
-      "path": "./infrastructure"
+      "path": "./infrastructure",
     },
   ],
+
   "settings": {
     // Search exclusions
     "search.exclude": {
       "**/node_modules": true,
       "**/tmp": true,
-      "**/vendor": true
+      "**/vendor": true,
+    },
+
+    // File associations
+    "files.associations": {
+      "*.tfvars*": "terraform-vars",
+      "*.code-workspace": "jsonc",
     },
 
     // YAML
@@ -27,5 +34,16 @@
     "yaml.schemas": {
       "https://json.schemastore.org/taskfile.json": "tasks/*.yml",
     },
+
+    // Terraform
+    "[terraform]": {
+      "editor.defaultFormatter": "hashicorp.terraform",
+      "editor.formatOnSave": true,
+    },
+    "[terraform-vars]": {
+      "editor.defaultFormatter": "hashicorp.terraform",
+      "editor.formatOnSave": true,
+    },
+    "terraform.experimentalFeatures.validateOnSave": true,
   },
 }
