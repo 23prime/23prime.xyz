@@ -1,0 +1,43 @@
+name: Check infrastructure
+
+on:
+  push:
+    paths:
+      - "infrastructure/**"
+      - ".github/workflows/check-infrastructure.yml"
+  pull_request:
+    paths:
+      - "infrastructure/**"
+      - ".github/workflows/check-infrastructure.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install mise and setup
+        uses: jdx/mise-action@v3
+        with:
+          install: true
+          install_args: "terraform"
+          cache: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fix
+        run: task infra:fix
+
+      - name: Commit and Push
+        uses: 23prime/simple-commit-and-push@v1
+        with:
+          commit-message: "Auto fix code by `task infra:fix`"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check
+        run: task infra:check
