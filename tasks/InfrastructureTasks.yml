@@ -1,24 +1,46 @@
 version: "3"
 
+env:
+  AWS_PROFILE: "default"
+
 tasks:
-  login:
-    desc: "Login to Terraform Cloud"
-    dir: infrastructure
-    cmds:
-      - terraform login
-
-  init:
-    desc: "Initialize Terraform"
-    dir: infrastructure
-    cmds:
-      - terraform init
-
   check:
     desc: "Check Terraform configuration"
     dir: infrastructure
     cmds:
       - task: fix
       - task: validate
+      - task: fmt:check
+
+  init:
+    desc: "Initialize Terraform"
+    dir: infrastructure
+    cmds:
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform init
+
+  init:migrate:
+    desc: "Initialize Terraform and migrate state"
+    dir: infrastructure
+    cmds:
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform init -migrate-state
+
+  plan:
+    desc: "Plan Terraform changes"
+    dir: infrastructure
+    cmds:
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform plan
+
+  apply:
+    desc: "Apply Terraform changes"
+    dir: infrastructure
+    cmds:
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform apply
+
+  destroy:
+    desc: "Destroy Terraform infrastructure"
+    dir: infrastructure
+    cmds:
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform destroy
 
   validate:
     desc: "Validate Terraform configuration"
@@ -33,7 +55,7 @@ tasks:
       - terraform fmt -recursive
 
   fmt:check:
-    desc: "Check Terraform files formatting"
+    desc: "Check Terraform formatting"
     dir: infrastructure
     cmds:
       - terraform fmt -check -recursive
@@ -44,38 +66,19 @@ tasks:
     cmds:
       - task: fmt
 
-  plan:
-    desc: "Show Terraform execution plan"
-    dir: infrastructure
-    cmds:
-      - terraform plan
-
-  apply:
-    desc: "Apply Terraform configuration"
-    dir: infrastructure
-    cmds:
-      - terraform apply
-
-  destroy:
-    desc: "Destroy Terraform-managed infrastructure"
-    dir: infrastructure
-    cmds:
-      - terraform destroy
-
   output:
     desc: "Show Terraform outputs"
     dir: infrastructure
     cmds:
-      - terraform output
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform output
 
-  show:
+  state:
     desc: "Show Terraform state"
     dir: infrastructure
     cmds:
-      - terraform show
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform show
 
-  clean:
-    desc: "Clean Terraform files"
-    dir: infrastructure
+  version:
+    desc: "Show Terraform version"
     cmds:
-      - rm -rf .terraform terraform.tfstate* .terraform.lock.hcl
+      - terraform version
