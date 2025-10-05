@@ -20,7 +20,7 @@ My page.
 - **AWS CloudFront** - CDN for global content delivery
 - **Origin Access Control (OAC)** - Secure access from CloudFront to S3
 - **Terraform** - Infrastructure as Code
-- **Terraform Cloud** - Remote state management and execution
+- **AWS S3** - Remote state management with state locking
 
 ### Development Tools
 
@@ -60,8 +60,8 @@ My page.
 
 - [mise](https://mise.jdx.dev) - for tool version management
 - [Task](https://taskfile.dev) - for running tasks
-- [Terraform Cloud](https://app.terraform.io/) - for remote state management
-- AWS CLI configured
+- [aws-vault](https://github.com/99designs/aws-vault) - for AWS credential management (recommended)
+- AWS CLI configured with appropriate credentials
 
 ### Setup
 
@@ -182,41 +182,21 @@ pnpm dlx shadcn@latest add dialog
 
 ### Infrastructure Setup
 
-#### Terraform Cloud Configuration
-
-1. Create a Terraform Cloud account at [https://app.terraform.io/](https://app.terraform.io/)
-1. Create an organization
-1. Create a workspace named `homepage-production` (or update `infrastructure/main.tf`)
-1. Update `infrastructure/main.tf` with your organization name:
-
-```hcl
-cloud {
-  organization = "your-organization-name"
-
-  workspaces {
-    name = "homepage-production"
-  }
-}
-```
-
-#### Authentication
-
-Login to Terraform Cloud:
-
-```bash
-terraform login
-```
-
-Or set the `TF_TOKEN_app_terraform_io` environment variable.
-
 #### AWS Credentials
 
-Configure in Terraform Cloud workspace:
+Configure AWS credentials using aws-vault:
 
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
+```bash
+aws-vault add default
+```
 
-Or use AWS OIDC integration (recommended).
+#### S3 Backend Setup
+
+The Terraform state is stored in an S3 bucket. Ensure the bucket exists before running `terraform init`:
+
+- Bucket: `tfstate-23prime-xyz-678084882233`
+- Region: `ap-northeast-1`
+- Encryption: Enabled
 
 #### Deploy Infrastructure
 
@@ -255,12 +235,11 @@ terraform apply
 
 #### Customization
 
-Create a `terraform.tfvars` file or set variables in Terraform Cloud:
+Create a `terraform.tfvars` file in the `infrastructure/` directory:
 
 ```hcl
 aws_region   = "us-east-1"
 project_name = "my-homepage"
-environment  = "production"
 ```
 
 #### Outputs
@@ -307,24 +286,20 @@ aws cloudfront create-invalidation \
 
 ### GitHub Actions Configuration
 
-Configure the following secrets in your GitHub repository:
-
-**Terraform Cloud:**
-
-- `TF_API_TOKEN` - Terraform Cloud API token
+Configure the following secrets in your GitHub repository for deployment:
 
 **AWS Credentials (choose one method):**
 
-Option 1 - Access Keys:
+Option 1 - OIDC (recommended):
+
+- `AWS_ROLE_ARN` - AWS IAM role ARN for OIDC
+- `AWS_REGION` - AWS region (e.g., ap-northeast-1)
+
+Option 2 - Access Keys:
 
 - `AWS_ACCESS_KEY_ID` - AWS access key ID
 - `AWS_SECRET_ACCESS_KEY` - AWS secret access key
-- `AWS_REGION` - AWS region (e.g., us-east-1)
-
-Option 2 - OIDC (recommended):
-
-- `AWS_ROLE_ARN` - AWS IAM role ARN for OIDC
-- `AWS_REGION` - AWS region (e.g., us-east-1)
+- `AWS_REGION` - AWS region (e.g., ap-northeast-1)
 
 ## Styling
 
