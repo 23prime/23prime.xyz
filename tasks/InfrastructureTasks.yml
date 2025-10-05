@@ -1,6 +1,12 @@
 version: "3"
 
 tasks:
+  login:
+    desc: "Login to Terraform Cloud"
+    dir: infrastructure
+    cmds:
+      - terraform login
+
   init:
     desc: "Initialize Terraform"
     dir: infrastructure
