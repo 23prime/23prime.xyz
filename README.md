@@ -1,6 +1,6 @@
-# Personal Homepage
+# 23prime.xyz
 
-A personal homepage built with React and deployed on AWS.
+My page.
 
 ## Tech Stack
 
