@@ -35,6 +35,15 @@ tasks:
     aliases:
       - s
 
+  code-workspace:fmt:
+    desc: "Format .code-workspace file"
+    vars:
+      FILE_NAME: "23prime.xyz.code-workspace"
+    cmds:
+      - mv {{.FILE_NAME}} {{.FILE_NAME}}.jsonc
+      - defer: mv {{.FILE_NAME}}.jsonc {{.FILE_NAME}}
+      - biome format --write {{.FILE_NAME}}.jsonc
+
   check:
     desc: "Check"
     deps:
