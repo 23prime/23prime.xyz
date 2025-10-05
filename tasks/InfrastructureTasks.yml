@@ -26,6 +26,12 @@ tasks:
     cmds:
       - terraform fmt -recursive
 
+  fmt:check:
+    desc: "Check Terraform files formatting"
+    dir: infrastructure
+    cmds:
+      - terraform fmt -check -recursive
+
   fix:
     desc: "Fix Terraform"
     dir: infrastructure

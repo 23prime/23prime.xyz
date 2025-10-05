@@ -40,4 +40,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check
-        run: task infra:check
+        run: task infra:fmt:check
