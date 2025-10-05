@@ -1,0 +1,31 @@
+{
+  "folders": [
+    {
+      "name": "Root",
+      "path": "."
+    },
+    {
+      "name": "Frontend",
+      "path": "./frontend"
+    },
+    {
+      "name": "Infrastructure",
+      "path": "./infrastructure"
+    },
+  ],
+  "settings": {
+    // Search exclusions
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/tmp": true,
+      "**/vendor": true
+    },
+
+    // YAML
+    // Note: This YAML settings must be placed in this file, not in .vscode/settings.json of root folder.
+    "yaml.format.enable": true,
+    "yaml.schemas": {
+      "https://json.schemastore.org/taskfile.json": "tasks/*.yml",
+    },
+  },
+}
