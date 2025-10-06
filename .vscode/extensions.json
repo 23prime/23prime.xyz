@@ -16,5 +16,6 @@
     "wix.vscode-import-cost",
     "yoavbls.pretty-ts-errors",
     "pranaygp.vscode-css-peek",
-  ],
+    "esbenp.prettier-vscode"
+  ]
 }
