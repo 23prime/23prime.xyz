@@ -3,7 +3,7 @@
   "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**/*.json", "**/*.jsonc", "!**/node_modules", "!**/dist", "!**/.terraform", "!frontend"],
+    "includes": ["**/*.json", "**/*.jsonc", "!**/node_modules", "!**/dist", "!**/.terraform", "!frontend", "!e2e"],
   },
   "formatter": {
     "indentStyle": "space",

@@ -5,6 +5,7 @@ ignore: |
   node_modules/
   .terraform/
   dist/
+  pnpm-lock.yaml
 
 rules:
   document-start: disable
