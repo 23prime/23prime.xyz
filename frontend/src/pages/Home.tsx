@@ -1,5 +1,25 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { NavigationCard } from "@/components/NavigationCard";
+
+const NAVIGATION_CARDS = [
+  {
+    to: "/about",
+    title: "About",
+    description: "Learn more about my background and skills",
+    buttonText: "View Profile",
+  },
+  {
+    to: "/projects",
+    title: "Projects",
+    description: "Check out my portfolio and works",
+    buttonText: "View Projects",
+  },
+  {
+    to: "/contact",
+    title: "Contact",
+    description: "Get in touch with me",
+    buttonText: "Contact Me",
+  },
+] as const;
 
 export function Home() {
   return (
@@ -22,41 +42,9 @@ export function Home() {
 
         {/* Navigation Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Link to="/about" className="block">
-            <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <h2 className="text-2xl font-semibold mb-2">About</h2>
-              <p className="text-muted-foreground mb-4">
-                Learn more about my background and skills
-              </p>
-              <Button variant="outline" className="w-full">
-                View Profile
-              </Button>
-            </div>
-          </Link>
-
-          <Link to="/projects" className="block">
-            <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <h2 className="text-2xl font-semibold mb-2">Projects</h2>
-              <p className="text-muted-foreground mb-4">
-                Check out my portfolio and works
-              </p>
-              <Button variant="outline" className="w-full">
-                View Projects
-              </Button>
-            </div>
-          </Link>
-
-          <Link to="/contact" className="block">
-            <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <h2 className="text-2xl font-semibold mb-2">Contact</h2>
-              <p className="text-muted-foreground mb-4">
-                Get in touch with me
-              </p>
-              <Button variant="outline" className="w-full">
-                Contact Me
-              </Button>
-            </div>
-          </Link>
+          {NAVIGATION_CARDS.map((card) => (
+            <NavigationCard key={card.to} {...card} />
+          ))}
         </div>
       </div>
     </div>
