@@ -8,6 +8,18 @@ tasks:
       - pnpm install
       - pnpm exec playwright install chromium
 
+  deps:add:
+    desc: "Add pnpm dependencies"
+    dir: e2e
+    cmds:
+      - pnpm add {{.CLI_ARGS}}
+
+  deps:add:dev:
+    desc: "Add pnpm dependencies as dev"
+    dir: e2e
+    cmds:
+      - pnpm add -D {{.CLI_ARGS}}
+
   test:
     desc: "Run E2E tests"
     dir: e2e

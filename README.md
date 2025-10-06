@@ -113,6 +113,8 @@ Frontend tasks:
 
 - `task front:dev` - Start development server
 - `task front:build` - Build for production
+- `task front:deps:add -- [package]` - Add frontend dependencies
+- `task front:deps:add:dev -- [package]` - Add frontend dev dependencies
 - `task front:check` - Check frontend (lint + type-check)
 - `task front:lint` - Run ESLint
 - `task front:lint:fix` - Auto-fix ESLint issues
@@ -128,6 +130,8 @@ Infrastructure tasks:
 E2E testing tasks:
 
 - `task e2e:install` - Install E2E test dependencies and browsers
+- `task e2e:deps:add -- [package]` - Add E2E dependencies
+- `task e2e:deps:add:dev -- [package]` - Add E2E dev dependencies
 - `task e2e:test` - Run E2E tests
 - `task e2e:test:ui` - Run E2E tests in UI mode
 - `task e2e:test:debug` - Run E2E tests in debug mode

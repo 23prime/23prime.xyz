@@ -73,10 +73,12 @@ task setup          # Install all tools via mise
 ### Frontend Development
 
 ```bash
-task front:dev      # Start dev server (http://localhost:5173)
-task front:build    # Build for production
-task front:check    # Run linter + type-check
-task front:lint:fix # Auto-fix ESLint issues
+task front:dev           # Start dev server (http://localhost:5173)
+task front:build         # Build for production
+task front:deps:add -- pkg # Add frontend dependencies
+task front:deps:add:dev -- pkg # Add frontend dev dependencies
+task front:check         # Run linter + type-check
+task front:lint:fix      # Auto-fix ESLint issues
 task front:add-component -- button  # Add shadcn/ui component
 ```
 
@@ -104,13 +106,15 @@ task infra:output   # Show outputs (bucket name, CloudFront domain, etc.)
 ### E2E Testing
 
 ```bash
-task e2e:install    # Install E2E dependencies and browsers
-task e2e:test       # Run E2E tests (requires dev server running)
-task e2e:test:ui    # Run tests in UI mode
-task e2e:test:debug # Run tests in debug mode
-task e2e:test:headed # Run tests with browser visible
-task e2e:test:prod  # Run tests against production (https://23prime.xyz)
-task e2e:report     # Show test report
+task e2e:install         # Install E2E dependencies and browsers
+task e2e:deps:add -- pkg # Add E2E dependencies
+task e2e:deps:add:dev -- pkg # Add E2E dev dependencies
+task e2e:test            # Run E2E tests (requires dev server running)
+task e2e:test:ui         # Run tests in UI mode
+task e2e:test:debug      # Run tests in debug mode
+task e2e:test:headed     # Run tests with browser visible
+task e2e:test:prod       # Run tests against production (https://23prime.xyz)
+task e2e:report          # Show test report
 ```
 
 **Important**: Before running E2E tests, start the frontend dev server in another terminal:

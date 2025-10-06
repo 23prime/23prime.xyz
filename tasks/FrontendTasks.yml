@@ -7,6 +7,18 @@ tasks:
     cmds:
       - pnpm install
 
+  deps:add:
+    desc: "Add pnpm dependencies"
+    dir: frontend
+    cmds:
+      - pnpm add {{.CLI_ARGS}}
+
+  deps:add:dev:
+    desc: "Add pnpm dependencies as dev"
+    dir: frontend
+    cmds:
+      - pnpm add -D {{.CLI_ARGS}}
+
   dev:
     desc: "Start development server"
     dir: frontend
