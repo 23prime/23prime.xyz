@@ -7,6 +7,7 @@ export const SITE_CONFIG = {
   links: {
     github: "https://github.com/23prime",
     twitter: "https://x.com/23_prime",
+    blog: "https://zenn.dev/23prime",
   },
 } as const;
 

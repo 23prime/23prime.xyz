@@ -2,12 +2,17 @@ import { Link } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import { SITE_CONFIG } from "@/lib/config";
 
-const NAV_ITEMS = [
+type NavItem =
+  | { to: string; label: string; external?: false }
+  | { href: string; label: string; external: true };
+
+const NAV_ITEMS: NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/projects", label: "Projects" },
+  { href: SITE_CONFIG.links.blog, label: "Blog", external: true },
   { to: "/contact", label: "Contact" },
-] as const;
+];
 
 export function Header() {
   return (
@@ -20,10 +25,24 @@ export function Header() {
           <div className="flex items-center gap-6">
             <ul className="flex gap-6">
               {NAV_ITEMS.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className="hover:text-primary transition-colors">
-                    {item.label}
-                  </Link>
+                <li key={item.label}>
+                  {item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary transition-colors"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.to}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
