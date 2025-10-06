@@ -1,13 +1,82 @@
 version: 2
 
 updates:
+  # GitHub Actions dependencies
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
     cooldown:
       default-days: 3
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+
+  # Terraform dependencies
+  - package-ecosystem: "terraform"
+    directory: "/infrastructure"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "infra"
+      include: "scope"
+
+  # npm (frontend) dependencies
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+    cooldown:
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 3
+      default-days: 7
+    groups:
+      # React and related packages
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react*"
+      # Development tools
+      dev-tools:
+        patterns:
+          - "vite"
+          - "typescript"
+          - "eslint*"
+          - "@vitejs/*"
+          - "globals"
+      # Tailwind CSS and PostCSS
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "autoprefixer"
+          - "postcss"
+      # shadcn/ui and related UI libraries
+      ui-components:
+        patterns:
+          - "@radix-ui/*"
+          - "class-variance-authority"
+          - "clsx"
+          - "tailwind-merge"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps"
+      prefix-development: "deps-dev"
       include: "scope"
+    ignore:
+      # Ignore major version updates for breaking changes
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
