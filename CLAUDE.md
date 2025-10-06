@@ -21,6 +21,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **DO NOT** run individual commands like `terraform fmt`, `pnpm lint`, etc. directly. Always use the corresponding `task` command to ensure consistency.
 
+## UI Verification Workflow
+
+**When making UI-related changes to the frontend:**
+
+1. Run `task front:check` to verify code quality
+2. Use Chrome DevTools MCP to verify the UI works correctly:
+   - Navigate to `http://localhost:5173` (ensure dev server is running)
+   - Take screenshots to verify visual appearance
+   - Test interactive elements (buttons, links, theme toggle, etc.)
+   - Verify responsive design if applicable
+
+This ensures both code quality and user-facing functionality are validated before committing changes.
+
 ## Architecture Overview
 
 This is a personal homepage project with a **React SPA frontend** deployed to **AWS S3 + CloudFront** using **Terraform**. The project uses **Taskfile** for task automation and **mise** for tool version management.
