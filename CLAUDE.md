@@ -14,6 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - After editing frontend code → `task front:check`
 - After editing infrastructure code → `task infra:check`
+- After editing E2E test code → `task e2e:test`
 - After editing YAML files → `task yml:check`
 - After editing JSON files → `task json:check`
 - After editing Markdown files → `task md:check`
@@ -54,7 +55,12 @@ This is a personal homepage project with a **React SPA frontend** deployed to **
    - Builds frontend → Syncs to S3 → Invalidates CloudFront cache
    - Uses AWS OIDC for authentication (no long-lived credentials)
 
-4. **Tool Management**: mise installs all tools (terraform, pnpm, actionlint, etc.) defined in `mise.toml`
+4. **E2E Testing**: Independent Playwright project in `e2e/`
+   - Separate from frontend to remain framework-agnostic
+   - Tests run against local dev server or production
+   - Configurable base URL via environment variable
+
+5. **Tool Management**: mise installs all tools (terraform, pnpm, actionlint, etc.) defined in `mise.toml`
 
 ## Common Commands
 
@@ -95,6 +101,24 @@ task infra:apply    # Apply changes
 task infra:output   # Show outputs (bucket name, CloudFront domain, etc.)
 ```
 
+### E2E Testing
+
+```bash
+task e2e:install    # Install E2E dependencies and browsers
+task e2e:test       # Run E2E tests (requires dev server running)
+task e2e:test:ui    # Run tests in UI mode
+task e2e:test:debug # Run tests in debug mode
+task e2e:test:headed # Run tests with browser visible
+task e2e:test:prod  # Run tests against production (https://23prime.xyz)
+task e2e:report     # Show test report
+```
+
+**Important**: Before running E2E tests, start the frontend dev server in another terminal:
+
+```bash
+task front:dev
+```
+
 ### Checks
 
 ```bash
@@ -116,12 +140,16 @@ task gh:check       # Check GitHub Actions workflows
 │   │   ├── App.tsx        # React Router routes
 │   │   └── main.tsx       # Entry point
 │   └── vite.config.ts     # Path alias: @ → src/
+├── e2e/                   # E2E tests (independent project)
+│   ├── tests/             # Test specs (*.spec.ts)
+│   ├── playwright.config.ts # Playwright configuration
+│   └── package.json       # Independent dependencies
 ├── infrastructure/        # Terraform IaC
 │   ├── main.tf            # Provider, backend, S3 bucket
 │   ├── cloudfront.tf      # CloudFront distribution, OAC, custom error responses
 │   ├── variables.tf       # Input variables
 │   └── outputs.tf         # Outputs (bucket name, CloudFront domain, etc.)
-└── tasks/                 # Taskfile task definitions (Frontend, Infrastructure, etc.)
+└── tasks/                 # Taskfile task definitions (Frontend, Infrastructure, E2E, etc.)
 ```
 
 ## Infrastructure Details

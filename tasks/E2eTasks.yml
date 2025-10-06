@@ -1,0 +1,72 @@
+version: "3"
+
+tasks:
+  install:
+    desc: "Install E2E test dependencies and browsers"
+    dir: e2e
+    cmds:
+      - pnpm install
+      - pnpm exec playwright install chromium
+
+  test:
+    desc: "Run E2E tests"
+    dir: e2e
+    cmds:
+      - pnpm test
+
+  test:ui:
+    desc: "Run E2E tests in UI mode"
+    dir: e2e
+    cmds:
+      - pnpm run test:ui
+
+  test:debug:
+    desc: "Run E2E tests in debug mode"
+    dir: e2e
+    cmds:
+      - pnpm run test:debug
+
+  test:headed:
+    desc: "Run E2E tests with browser visible"
+    dir: e2e
+    cmds:
+      - pnpm run test:headed
+
+  test:prod:
+    desc: "Run E2E tests against production"
+    dir: e2e
+    env:
+      BASE_URL: "https://23prime.xyz"
+    cmds:
+      - pnpm test
+
+  report:
+    desc: "Show E2E test report"
+    dir: e2e
+    cmds:
+      - pnpm run report
+
+  check:
+    desc: "Format and run E2E tests"
+    dir: e2e
+    cmds:
+      - task: fix
+      - task: test
+
+  fix:
+    desc: "Fix E2E test"
+    dir: e2e
+    cmds:
+      - task: fmt
+
+  fmt:
+    desc: "Format E2E test code with Prettier"
+    dir: e2e
+    cmds:
+      - pnpm run format
+
+  fmt:check:
+    desc: "Check E2E test code formatting"
+    dir: e2e
+    cmds:
+      - pnpm run format:check

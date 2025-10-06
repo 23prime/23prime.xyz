@@ -14,6 +14,11 @@ My page.
 - **shadcn/ui** - Re-usable UI components
 - **pnpm** - Package manager
 
+### E2E Testing
+
+- **Playwright** - End-to-end testing framework
+- Independent project structure for framework-agnostic testing
+
 ### Infrastructure
 
 - **AWS S3** - Static website hosting
@@ -42,6 +47,16 @@ My page.
 │   │   └── index.css      # Global styles
 │   ├── public/
 │   └── package.json
+├── e2e/               # E2E tests (independent project)
+│   ├── tests/             # Test files
+│   │   ├── home.spec.ts
+│   │   ├── about.spec.ts
+│   │   ├── contact.spec.ts
+│   │   ├── projects.spec.ts
+│   │   ├── theme-toggle.spec.ts
+│   │   └── navigation.spec.ts
+│   ├── playwright.config.ts
+│   └── package.json
 ├── infrastructure/    # Terraform configuration
 │   ├── main.tf
 │   ├── cloudfront.tf
@@ -50,6 +65,7 @@ My page.
 └── tasks/            # Taskfile task definitions
     ├── FrontendTasks.yml
     ├── InfrastructureTasks.yml
+    ├── E2eTasks.yml
     ├── MiseTasks.yml
     └── ...
 ```
@@ -108,6 +124,16 @@ Infrastructure tasks:
 - `task infra:check` - Check Terraform configuration (format + validate)
 - `task infra:plan` - Show Terraform execution plan
 - `task infra:apply` - Apply Terraform configuration
+
+E2E testing tasks:
+
+- `task e2e:install` - Install E2E test dependencies and browsers
+- `task e2e:test` - Run E2E tests
+- `task e2e:test:ui` - Run E2E tests in UI mode
+- `task e2e:test:debug` - Run E2E tests in debug mode
+- `task e2e:test:headed` - Run E2E tests with browser visible
+- `task e2e:test:prod` - Run E2E tests against production
+- `task e2e:report` - Show E2E test report
 
 ### Frontend Development
 
@@ -179,6 +205,64 @@ Examples:
 pnpm dlx shadcn@latest add card
 pnpm dlx shadcn@latest add dialog
 ```
+
+### E2E Testing Details
+
+The E2E tests are in a separate, independent project to ensure they remain framework-agnostic and won't break when frontend dependencies are updated.
+
+#### E2E Setup
+
+Install E2E test dependencies and browsers:
+
+```bash
+task e2e:install
+```
+
+#### Running Tests
+
+**Prerequisites**: Start the frontend development server before running tests:
+
+```bash
+task front:dev
+```
+
+Then in another terminal, run tests:
+
+```bash
+# Run all tests
+task e2e:test
+
+# Run tests in UI mode (interactive)
+task e2e:test:ui
+
+# Run tests in debug mode
+task e2e:test:debug
+
+# Run tests with browser visible
+task e2e:test:headed
+
+# Show test report
+task e2e:report
+```
+
+#### Testing Against Production
+
+Test against the production website:
+
+```bash
+task e2e:test:prod
+```
+
+This sets `BASE_URL=https://23prime.xyz` and runs tests against the live site.
+
+#### Test Files
+
+- `home.spec.ts` - Home page navigation and basic functionality
+- `about.spec.ts` - About page display
+- `projects.spec.ts` - Projects page display
+- `contact.spec.ts` - Contact page and external links
+- `theme-toggle.spec.ts` - Theme switching (light/dark/system)
+- `navigation.spec.ts` - SPA routing and browser navigation
 
 ### Infrastructure Setup
 

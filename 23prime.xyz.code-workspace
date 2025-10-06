@@ -12,6 +12,10 @@
       "name": "Infrastructure",
       "path": "./infrastructure",
     },
+    {
+      "name": "E2E",
+      "path": "./e2e",
+    }
   ],
 
   "settings": {

@@ -8,6 +8,7 @@ includes:
   gh: tasks/GitHubTasks.yml
   front: tasks/FrontendTasks.yml
   infra: tasks/InfrastructureTasks.yml
+  e2e: tasks/E2eTasks.yml
 
 tasks:
   default:
@@ -53,5 +54,6 @@ tasks:
       - gh:check
       - front:check
       - infra:check
+      - e2e:check
     aliases:
       - c
