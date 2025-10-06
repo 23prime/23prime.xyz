@@ -1,0 +1,11 @@
+# AWS Configuration
+aws_account_id = "123456789012"
+aws_region     = "ap-northeast-1"
+
+# Project Configuration
+project_name = "your-project-name"
+domain       = "example.com"
+
+# GitHub Configuration for OIDC Authentication
+github_org  = "your-github-org"
+github_repo = "your-repo-name"
