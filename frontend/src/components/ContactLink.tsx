@@ -5,12 +5,7 @@ type ContactLinkProps = {
   external?: boolean;
 };
 
-export function ContactLink({
-  icon,
-  label,
-  href,
-  external = false,
-}: ContactLinkProps) {
+export function ContactLink({ icon, label, href, external = false }: ContactLinkProps) {
   return (
     <a
       href={href}

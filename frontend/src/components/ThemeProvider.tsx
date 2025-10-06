@@ -6,7 +6,7 @@ export const THEMES = {
   SYSTEM: "system",
 } as const;
 
-export type Theme = typeof THEMES[keyof typeof THEMES];
+export type Theme = (typeof THEMES)[keyof typeof THEMES];
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -49,7 +49,7 @@ export function ThemeProvider({
       localStorage.removeItem(storageKey);
       console.warn(
         `Invalid theme value "${storedValue}" found in localStorage. ` +
-        `Cleared and falling back to default theme "${defaultTheme}".`
+          `Cleared and falling back to default theme "${defaultTheme}".`
       );
     }
 
@@ -62,10 +62,7 @@ export function ThemeProvider({
     root.classList.remove(THEMES.LIGHT, THEMES.DARK);
 
     if (theme === THEMES.SYSTEM) {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? THEMES.DARK
-        : THEMES.LIGHT;
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? THEMES.DARK : THEMES.LIGHT;
 
       root.classList.add(systemTheme);
       return;
@@ -93,8 +90,7 @@ export function ThemeProvider({
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 
-  if (context === undefined)
-    throw new Error("useTheme must be used within a ThemeProvider");
+  if (context === undefined) throw new Error("useTheme must be used within a ThemeProvider");
 
   return context;
 };

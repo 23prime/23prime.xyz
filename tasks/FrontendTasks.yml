@@ -32,6 +32,7 @@ tasks:
       - task: fix
       - task: type-check
       - task: lint
+      - task: fmt:check
 
   lint:
     desc: "Run ESLint"
@@ -49,7 +50,20 @@ tasks:
     desc: "Fix frontend"
     dir: frontend
     cmds:
+      - task: fmt
       - task: lint:fix
+
+  fmt:
+    desc: "Format code with Prettier"
+    dir: frontend
+    cmds:
+      - pnpm format
+
+  fmt:check:
+    desc: "Check code formatting"
+    dir: frontend
+    cmds:
+      - pnpm format:check
 
   type-check:
     desc: "Run TypeScript type checking"

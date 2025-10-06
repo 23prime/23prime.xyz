@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import { SITE_CONFIG } from "@/lib/config";
 
-type NavItem =
-  | { to: string; label: string; external?: false }
-  | { href: string; label: string; external: true };
+type NavItem = { to: string; label: string; external?: false } | { href: string; label: string; external: true };
 
 const NAV_ITEMS: NavItem[] = [
   { to: "/", label: "Home" },
@@ -36,10 +34,7 @@ export function Header() {
                       {item.label}
                     </a>
                   ) : (
-                    <Link
-                      to={item.to}
-                      className="hover:text-primary transition-colors"
-                    >
+                    <Link to={item.to} className="hover:text-primary transition-colors">
                       {item.label}
                     </Link>
                   )}
