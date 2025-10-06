@@ -190,13 +190,58 @@ Configure AWS credentials using aws-vault:
 aws-vault add default
 ```
 
-#### S3 Backend Setup
+#### Infrastructure Prerequisites
+
+##### 1. GitHub OIDC Provider
+
+The GitHub OIDC Provider must exist in your AWS account before applying infrastructure. This provider is shared across all GitHub Actions workflows in the account and only needs to be created once.
+
+Check if it exists:
+
+```bash
+aws-vault exec default -- aws iam list-open-id-connect-providers | grep token.actions.githubusercontent.com
+```
+
+If it doesn't exist, create it:
+
+```bash
+aws-vault exec default -- aws iam create-open-id-connect-provider \
+  --url https://token.actions.githubusercontent.com \
+  --client-id-list sts.amazonaws.com \
+  --thumbprint-list 6938fd4d98bab03faadb97b34396831e3780aea1
+```
+
+##### 2. S3 Backend Setup
 
 The Terraform state is stored in an S3 bucket. Ensure the bucket exists before running `terraform init`:
 
 - Bucket: `tfstate-23prime-xyz-678084882233`
 - Region: `ap-northeast-1`
 - Encryption: Enabled
+
+##### 3. Configure Variables
+
+Copy the example file and configure your values:
+
+```bash
+cp infrastructure/terraform.tfvars.example infrastructure/terraform.tfvars
+```
+
+Edit `infrastructure/terraform.tfvars`:
+
+```hcl
+# AWS Configuration
+aws_account_id = "123456789012"
+aws_region     = "ap-northeast-1"
+
+# Project Configuration
+project_name = "your-project-name"
+domain       = "example.com"
+
+# GitHub Configuration for OIDC Authentication
+github_org  = "your-github-org"
+github_repo = "your-repo-name"
+```
 
 #### Deploy Infrastructure
 
@@ -233,22 +278,21 @@ terraform apply
 - `task infra:destroy` - Destroy infrastructure
 - `task infra:clean` - Clean Terraform files
 
-#### Customization
-
-Create a `terraform.tfvars` file in the `infrastructure/` directory:
-
-```hcl
-aws_region   = "us-east-1"
-project_name = "my-homepage"
-```
-
 #### Outputs
 
-After deployment, Terraform outputs:
+After deployment, get outputs for GitHub Actions configuration:
 
-- S3 bucket name and ARN
-- CloudFront distribution ID and domain name
-- Website URL
+```bash
+task infra:output
+```
+
+Outputs include:
+
+- `github_actions_role_arn` - IAM role ARN for GitHub Actions
+- `s3_bucket_name` - S3 bucket name
+- `cloudfront_distribution_id` - CloudFront distribution ID
+- `cloudfront_domain_name` - CloudFront domain
+- `website_url` - Website URL
 
 ## Deployment
 
@@ -286,20 +330,13 @@ aws cloudfront create-invalidation \
 
 ### GitHub Actions Configuration
 
-Configure the following secrets in your GitHub repository for deployment:
+Configure the following **variables** (not secrets) in your GitHub repository (Settings → Secrets and variables → Actions → Variables):
 
-**AWS Credentials (choose one method):**
+- `AWS_ROLE_ARN` - IAM role ARN from `task infra:output` (`github_actions_role_arn`)
+- `S3_BUCKET_NAME` - S3 bucket name from `task infra:output` (`s3_bucket_name`)
+- `CLOUDFRONT_DISTRIBUTION_ID` - CloudFront distribution ID from `task infra:output` (`cloudfront_distribution_id`)
 
-Option 1 - OIDC (recommended):
-
-- `AWS_ROLE_ARN` - AWS IAM role ARN for OIDC
-- `AWS_REGION` - AWS region (e.g., ap-northeast-1)
-
-Option 2 - Access Keys:
-
-- `AWS_ACCESS_KEY_ID` - AWS access key ID
-- `AWS_SECRET_ACCESS_KEY` - AWS secret access key
-- `AWS_REGION` - AWS region (e.g., ap-northeast-1)
+The workflow uses AWS OIDC authentication, so no long-lived AWS credentials (secrets) are needed.
 
 ## Styling
 

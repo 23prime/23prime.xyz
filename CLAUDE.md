@@ -113,6 +113,23 @@ task gh:check       # Check GitHub Actions workflows
 
 ## Infrastructure Details
 
+### Prerequisites
+
+**GitHub OIDC Provider must exist in the AWS account before applying infrastructure:**
+
+```bash
+# Check if OIDC Provider exists
+aws-vault exec default -- aws iam list-open-id-connect-providers | grep token.actions.githubusercontent.com
+
+# If it doesn't exist, create it manually (only once per AWS account):
+aws-vault exec default -- aws iam create-open-id-connect-provider \
+  --url https://token.actions.githubusercontent.com \
+  --client-id-list sts.amazonaws.com \
+  --thumbprint-list 6938fd4d98bab03faadb97b34396831e3780aea1
+```
+
+The OIDC Provider is **shared across all GitHub Actions workflows** in the AWS account and is not project-specific.
+
 ### Terraform Backend
 
 - **S3 Bucket**: `tfstate-23prime-xyz-678084882233`
@@ -129,6 +146,8 @@ aws_account_id = "678084882233"
 aws_region     = "ap-northeast-1"
 project_name   = "23prime-xyz"
 domain         = "23prime.xyz"
+github_org     = "23prime"
+github_repo    = "23prime.xyz"
 ```
 
 ### CloudFront SPA Routing
@@ -156,13 +175,15 @@ aws s3 sync ../frontend/dist/ "s3://$BUCKET_NAME/" --delete
 aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*"
 ```
 
-## GitHub Actions Secrets
+## GitHub Actions Configuration
 
-Configure these secrets for deployment:
+Configure these **variables** (not secrets) in your GitHub repository (Settings → Secrets and variables → Actions → Variables):
 
-- `AWS_ROLE_ARN`: IAM role ARN for OIDC authentication
-- `AWS_REGION`: AWS region (e.g., `ap-northeast-1`)
-- `TF_API_TOKEN`: Terraform Cloud token (if using remote backend)
+- `AWS_ROLE_ARN`: IAM role ARN for OIDC authentication (from `terraform output github_actions_role_arn`)
+- `S3_BUCKET_NAME`: S3 bucket name (from `terraform output s3_bucket_name`)
+- `CLOUDFRONT_DISTRIBUTION_ID`: CloudFront distribution ID (from `terraform output cloudfront_distribution_id`)
+
+The workflow uses AWS OIDC authentication, so no long-lived AWS credentials (secrets) are needed.
 
 ## Tool Versions
 
