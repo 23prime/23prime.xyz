@@ -14,9 +14,15 @@ variable "project_name" {
   type        = string
 }
 
-variable "domain" {
-  description = "Domain name"
+variable "root_domain" {
+  description = "Root domain name (e.g., example.com, 23prime.xyz)"
   type        = string
+}
+
+variable "subdomain" {
+  description = "Subdomain (e.g., www). Leave empty for root domain."
+  type        = string
+  default     = ""
 }
 
 variable "github_org" {

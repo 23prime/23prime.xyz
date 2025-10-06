@@ -27,3 +27,18 @@ output "github_actions_role_arn" {
   description = "ARN of the IAM role for GitHub Actions"
   value       = aws_iam_role.github_actions.arn
 }
+
+output "acm_certificate_arn" {
+  description = "ARN of the ACM certificate"
+  value       = aws_acm_certificate.website.arn
+}
+
+output "custom_domain_url" {
+  description = "URL of the website with custom domain"
+  value       = "https://${local.full_domain}"
+}
+
+output "route53_zone_id" {
+  description = "ID of the Route 53 hosted zone"
+  value       = data.aws_route53_zone.main.zone_id
+}
