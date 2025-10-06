@@ -1,4 +1,5 @@
 import { NavigationCard } from "@/components/NavigationCard";
+import { SITE_CONFIG } from "@/lib/config";
 
 const NAVIGATION_CARDS = [
   {
@@ -29,14 +30,14 @@ export function Home() {
         <div className="text-center mb-16">
           <div className="mb-6">
             <img
-              src="/23prime.png"
-              alt="23prime profile"
+              src={SITE_CONFIG.profileImage}
+              alt={`${SITE_CONFIG.name} profile`}
               className="w-32 h-32 mx-auto rounded-full object-cover"
             />
           </div>
-          <h1 className="text-4xl font-bold mb-4">23prime</h1>
+          <h1 className="text-4xl font-bold mb-4">{SITE_CONFIG.name}</h1>
           <p className="text-xl text-muted-foreground">
-            Software Engineer
+            {SITE_CONFIG.title}
           </p>
         </div>
 

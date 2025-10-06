@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
+import { SITE_CONFIG } from "@/lib/config";
 
 export function Header() {
   return (
@@ -7,7 +8,7 @@ export function Header() {
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link to="/" className="text-xl font-bold">
-            23prime
+            {SITE_CONFIG.name}
           </Link>
           <div className="flex items-center gap-6">
             <ul className="flex gap-6">
