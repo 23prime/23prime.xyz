@@ -35,7 +35,7 @@ export function Home() {
               className="w-32 h-32 mx-auto rounded-full object-cover"
             />
           </div>
-          <h1 className="text-4xl font-bold mb-4">{SITE_CONFIG.name}</h1>
+          <h1 className="text-4xl font-bold mb-4">{SITE_CONFIG.nickname}@{SITE_CONFIG.name}</h1>
           <p className="text-xl text-muted-foreground">
             {SITE_CONFIG.title}
           </p>
