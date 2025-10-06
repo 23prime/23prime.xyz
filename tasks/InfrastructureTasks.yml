@@ -24,6 +24,12 @@ tasks:
     cmds:
       - aws-vault exec {{.AWS_PROFILE}} -- terraform init -migrate-state
 
+  init:upgrade:
+    desc: "Initialize Terraform and upgrade state"
+    dir: infrastructure
+    cmds:
+      - aws-vault exec {{.AWS_PROFILE}} -- terraform init -upgrade
+
   plan:
     desc: "Plan Terraform changes"
     dir: infrastructure
