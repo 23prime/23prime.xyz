@@ -15,54 +15,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - name: Install Task
+        uses: arduino/setup-task@v2
         with:
-          version: latest
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Install mise and setup
+        uses: jdx/mise-action@v3
         with:
-          node-version: '20'
-          cache: 'pnpm'
-          cache-dependency-path: frontend/pnpm-lock.yaml
+          install: true
+          install_args: "pnpm"
+          cache: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
-        run: pnpm install
-        working-directory: frontend
+        run: task front:install
 
       - name: Build
-        run: pnpm build
-        working-directory: frontend
+        run: task front:build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: latest
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-      - name: Get Terraform outputs
-        id: terraform
-        run: |
-          cd infrastructure
-          terraform init
-          echo "bucket_name=$(terraform output -raw s3_bucket_name)" >> "$GITHUB_OUTPUT"
-          echo "distribution_id=$(terraform output -raw cloudfront_distribution_id)" >> "$GITHUB_OUTPUT"
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ap-northeast-1
 
       - name: Deploy to S3
         run: |
-          aws s3 sync frontend/dist/ "s3://${{ steps.terraform.outputs.bucket_name }}/" --delete
+          aws s3 sync frontend/dist/ "s3://${{ vars.S3_BUCKET_NAME }}/" --delete
 
       - name: Invalidate CloudFront
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id "${{ steps.terraform.outputs.distribution_id }}" \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
             --paths "/*"
