@@ -1,29 +1,19 @@
-import { useTheme, THEMES } from "./ThemeProvider";
+import { useTheme, THEMES, type Theme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
+
+const THEME_CONFIG: Record<Theme, { icon: string; label: string; next: Theme }> = {
+  [THEMES.LIGHT]: { icon: "☀️", label: "Light", next: THEMES.DARK },
+  [THEMES.DARK]: { icon: "🌙", label: "Dark", next: THEMES.SYSTEM },
+  [THEMES.SYSTEM]: { icon: "💻", label: "System", next: THEMES.LIGHT },
+};
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
+  const themeConfig = THEME_CONFIG[theme];
+
   const toggleTheme = () => {
-    if (theme === THEMES.LIGHT) {
-      setTheme(THEMES.DARK);
-    } else if (theme === THEMES.DARK) {
-      setTheme(THEMES.SYSTEM);
-    } else {
-      setTheme(THEMES.LIGHT);
-    }
-  };
-
-  const getThemeIcon = () => {
-    if (theme === THEMES.LIGHT) return "☀️";
-    if (theme === THEMES.DARK) return "🌙";
-    return "💻";
-  };
-
-  const getThemeLabel = () => {
-    if (theme === THEMES.LIGHT) return "Light";
-    if (theme === THEMES.DARK) return "Dark";
-    return "System";
+    setTheme(themeConfig.next);
   };
 
   return (
@@ -31,10 +21,10 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      title={`Current theme: ${getThemeLabel()}`}
+      title={`Current theme: ${themeConfig.label}`}
       className="relative"
     >
-      <span className="text-lg">{getThemeIcon()}</span>
+      <span className="text-lg">{themeConfig.icon}</span>
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
