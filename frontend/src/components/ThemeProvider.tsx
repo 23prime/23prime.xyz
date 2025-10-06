@@ -26,15 +26,35 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+function isValidTheme(value: string | null): value is Theme {
+  if (!value) return false;
+  const validThemes = Object.values(THEMES);
+  return validThemes.includes(value as Theme);
+}
+
 export function ThemeProvider({
   children,
   defaultTheme = THEMES.SYSTEM,
   storageKey = "ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    const storedValue = localStorage.getItem(storageKey);
+
+    if (isValidTheme(storedValue)) {
+      return storedValue;
+    }
+
+    if (storedValue !== null) {
+      localStorage.removeItem(storageKey);
+      console.warn(
+        `Invalid theme value "${storedValue}" found in localStorage. ` +
+        `Cleared and falling back to default theme "${defaultTheme}".`
+      );
+    }
+
+    return defaultTheme;
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
