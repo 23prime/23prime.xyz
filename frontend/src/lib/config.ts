@@ -6,6 +6,7 @@ export const SITE_CONFIG = {
   email: "okkey@mail.23prime.xyz",
   links: {
     github: "https://github.com/23prime",
+    repository: "https://github.com/23prime/23prime.xyz",
     twitter: "https://x.com/23_prime",
     blog: "https://zenn.dev/23prime",
   },

@@ -10,12 +10,12 @@ export function Footer() {
           </p>
           <div className="flex gap-4">
             <a
-              href={SITE_CONFIG.links.github}
+              href={SITE_CONFIG.links.repository}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              GitHub
+              📁 Repository
             </a>
           </div>
         </div>
