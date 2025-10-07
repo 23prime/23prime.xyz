@@ -1,5 +1,20 @@
 import { test, expect } from "@playwright/test";
 
+async function navigateToPage(page: any, href: string) {
+  const isMobile = page.viewportSize().width < 768;
+
+  if (isMobile) {
+    // On mobile, open hamburger menu and click link in sheet
+    const menuButton = page.locator('button[aria-label="Open menu"]');
+    await menuButton.click();
+    const sheet = page.locator('[role="dialog"]');
+    await sheet.locator(`a[href="${href}"]`).click();
+  } else {
+    // On desktop, click link directly in header
+    await page.click(`header a[href="${href}"]`);
+  }
+}
+
 test.describe("Navigation", () => {
   test("should navigate through all pages", async ({ page }) => {
     // Start at home
@@ -7,19 +22,19 @@ test.describe("Navigation", () => {
     await expect(page).toHaveURL(/^.*\/$/);
 
     // Go to About
-    await page.click('a[href="/about"]');
+    await navigateToPage(page, "/about");
     await expect(page).toHaveURL(/\/about/);
 
     // Go to Projects
-    await page.click('a[href="/projects"]');
+    await navigateToPage(page, "/projects");
     await expect(page).toHaveURL(/\/projects/);
 
     // Go to Contact
-    await page.click('a[href="/contact"]');
+    await navigateToPage(page, "/contact");
     await expect(page).toHaveURL(/\/contact/);
 
     // Go back to Home
-    await page.click('a[href="/"]');
+    await navigateToPage(page, "/");
     await expect(page).toHaveURL(/^.*\/$/);
   });
 
@@ -45,7 +60,7 @@ test.describe("Navigation", () => {
     await page.goto("/");
 
     // Navigate to About
-    await page.click('a[href="/about"]');
+    await navigateToPage(page, "/about");
     await expect(page).toHaveURL(/\/about/);
 
     // Go back
