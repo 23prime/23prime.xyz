@@ -7,10 +7,6 @@ on:
     paths:
       - "frontend/**"
       - ".github/workflows/deploy.yml"
-  pull_request:
-    paths:
-      - "frontend/**"
-      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 permissions:
