@@ -1,13 +1,6 @@
 {
   // YAML
-<<<<<<< HEAD
   // Note: Some settings is placed in *.code-workspace.
-=======
-  "yaml.format.enable": true,
-  "yaml.schemas": {
-    "https://json.schemastore.org/taskfile.json": "tasks/*.yml"
-  },
->>>>>>> upstream/main
   "[yaml]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "redhat.vscode-yaml"
@@ -34,16 +27,12 @@
   },
 
   // Dictionary for spell checker
-<<<<<<< HEAD
   "cSpell.words": ["shellcheck", "Taskfile"],
 
   // Exclude folders defined as workspace folders
   "files.exclude": {
     "**/frontend": true,
     "**/infrastructure": true,
-    "**/e2e": true,
-  },
-=======
-  "cSpell.words": ["shellcheck", "Taskfile"]
->>>>>>> upstream/main
+    "**/e2e": true
+  }
 }
