@@ -1,32 +1,40 @@
 {
   // YAML
+<<<<<<< HEAD
   // Note: Some settings is placed in *.code-workspace.
+=======
+  "yaml.format.enable": true,
+  "yaml.schemas": {
+    "https://json.schemastore.org/taskfile.json": "tasks/*.yml"
+  },
+>>>>>>> upstream/main
   "[yaml]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   },
 
   // JSON
   "[json]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[jsonc]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
+    "source.fixAll.biome": "explicit"
   },
   "biome.enabled": true,
 
   // Markdown
   "[markdown]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
 
   // Dictionary for spell checker
+<<<<<<< HEAD
   "cSpell.words": ["shellcheck", "Taskfile"],
 
   // Exclude folders defined as workspace folders
@@ -35,4 +43,7 @@
     "**/infrastructure": true,
     "**/e2e": true,
   },
+=======
+  "cSpell.words": ["shellcheck", "Taskfile"]
+>>>>>>> upstream/main
 }

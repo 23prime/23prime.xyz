@@ -6,6 +6,7 @@
     "GitHub.vscode-github-actions",
     "EditorConfig.EditorConfig",
     "DavidAnson.vscode-markdownlint",
+<<<<<<< HEAD
     "biomejs.biome",
     "HashiCorp.terraform",
     "dsznajder.es7-react-js-snippets",
@@ -18,4 +19,8 @@
     "pranaygp.vscode-css-peek",
     "esbenp.prettier-vscode",
   ],
+=======
+    "biomejs.biome"
+  ]
+>>>>>>> upstream/main
 }
