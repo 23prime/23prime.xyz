@@ -41,10 +41,12 @@ tasks:
     desc: "Check frontend"
     dir: frontend
     cmds:
+      - task: install
       - task: fix
       - task: type-check
       - task: lint
       - task: fmt:check
+      - task: build
 
   lint:
     desc: "Run ESLint"
