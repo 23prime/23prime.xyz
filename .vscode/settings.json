@@ -3,27 +3,27 @@
   // Note: Some settings is placed in *.code-workspace.
   "[yaml]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   },
 
   // JSON
   "[json]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[jsonc]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
+    "source.fixAll.biome": "explicit"
   },
   "biome.enabled": true,
 
   // Markdown
   "[markdown]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
 
   // Dictionary for spell checker
@@ -33,6 +33,6 @@
   "files.exclude": {
     "**/frontend": true,
     "**/infrastructure": true,
-    "**/e2e": true,
-  },
+    "**/e2e": true
+  }
 }
