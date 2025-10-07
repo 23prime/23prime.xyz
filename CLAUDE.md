@@ -27,11 +27,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **When making UI-related changes to the frontend:**
 
 1. Run `task front:check` to verify code quality
-2. Use Chrome DevTools MCP to verify the UI works correctly:
+2. Use Chrome DevTools MCP or Playwright MCP to verify the UI works correctly:
    - Navigate to `http://localhost:5173` (ensure dev server is running)
    - Take screenshots to verify visual appearance
    - Test interactive elements (buttons, links, theme toggle, etc.)
    - Verify responsive design if applicable
+3. **ALWAYS delete any screenshots created during verification**:
+   - Chrome DevTools screenshots are not saved to disk (no cleanup needed)
+   - Playwright MCP screenshots are saved to `frontend/.playwright-mcp/`
+   - Delete the directory: `rm -rf frontend/.playwright-mcp`
 
 This ensures both code quality and user-facing functionality are validated before committing changes.
 
