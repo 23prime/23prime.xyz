@@ -1,20 +1,5 @@
 import { test, expect } from "@playwright/test";
 
-async function navigateToPage(page: any, href: string) {
-  const isMobile = page.viewportSize().width < 768;
-
-  if (isMobile) {
-    // On mobile, open hamburger menu and click link in sheet
-    const menuButton = page.locator('button[aria-label="Open menu"]');
-    await menuButton.click();
-    const sheet = page.locator('[role="dialog"]');
-    await sheet.locator(`a[href="${href}"]`).click();
-  } else {
-    // On desktop, click link directly in header
-    await page.click(`header a[href="${href}"]`);
-  }
-}
-
 test.describe("Contact Page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/contact");
@@ -34,22 +19,32 @@ test.describe("Contact Page", () => {
     await expect(footer).toBeVisible();
   });
 
-  test("should have external links", async ({ page }) => {
-    const isMobile = page.viewportSize().width < 768;
+  test("should have Twitter link", async ({ page, context }) => {
+    const link = page.locator("a[href^='https://x.com']").first();
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute("target", "_blank");
 
-    if (isMobile) {
-      // On mobile, check for external links in the main content (not in header menu)
-      const links = page.locator("main a[href^='http']");
-      await expect(links.first()).toBeVisible();
-    } else {
-      // On desktop, check for any external links
-      const links = page.locator("a[href^='http']");
-      await expect(links.first()).toBeVisible();
-    }
+    const pagePromise = context.waitForEvent("page");
+    await link.click();
+
+    const newPage = await pagePromise;
+    await expect(newPage).toHaveURL(/x\.com/);
   });
 
-  test("should navigate back to home", async ({ page }) => {
-    await navigateToPage(page, "/");
-    await expect(page).toHaveURL(/^.*\/$/);
+  test("should have GitHub link", async ({ page, context }) => {
+    const link = page.locator("a[href^='https://github.com']").first();
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute("target", "_blank");
+
+    const pagePromise = context.waitForEvent("page");
+    await link.click();
+
+    const newPage = await pagePromise;
+    await expect(newPage).toHaveURL(/github\.com/);
+  });
+
+  test("should have mail link", async ({ page }) => {
+    const link = page.locator("a[href^='mailto:']").first();
+    await expect(link).toBeVisible();
   });
 });
