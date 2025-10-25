@@ -15,9 +15,13 @@ shellcheck = "latest"
 
 # Other tools
 fzf = "latest"
+<<<<<<< HEAD
 
 # Frontend
 pnpm = "latest"
 
 # Infrastructure
 terraform = "latest"
+=======
+lefthook = "latest"
+>>>>>>> upstream/main
