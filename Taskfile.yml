@@ -57,3 +57,16 @@ tasks:
       - e2e:check
     aliases:
       - c
+
+  fix-and-check:
+    desc: "Fix and check"
+    deps:
+      - yml:check
+      - json:fix-and-check
+      - md:fix-and-check
+      - gh:check
+      - front:fix-and-check
+      - infra:fix-and-check
+      - e2e:fix-and-check
+    aliases:
+      - fc

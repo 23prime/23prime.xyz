@@ -37,12 +37,26 @@ tasks:
     cmds:
       - pnpm preview
 
+  fix-and-check:
+    desc: "Fix and check frontend"
+    cmds:
+      - task: install
+      - task: fix
+      - task: check
+  aliases:
+    - fc
+
+  fix:
+    desc: "Fix frontend"
+    dir: frontend
+    cmds:
+      - task: fmt
+      - task: lint:fix
+
   check:
     desc: "Check frontend"
     dir: frontend
     cmds:
-      - task: install
-      - task: fix
       - task: type-check
       - task: lint
       - task: fmt:check
@@ -59,13 +73,6 @@ tasks:
     dir: frontend
     cmds:
       - pnpm lint --fix
-
-  fix:
-    desc: "Fix frontend"
-    dir: frontend
-    cmds:
-      - task: fmt
-      - task: lint:fix
 
   fmt:
     desc: "Format code with Prettier"

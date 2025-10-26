@@ -58,18 +58,27 @@ tasks:
     cmds:
       - pnpm run report
 
-  check:
-    desc: "Format and run E2E tests"
+  fix-and-check:
+    desc: "Fix and check E2E tests"
     dir: e2e
     cmds:
       - task: fix
-      - task: test
+      - task: check
+  aliases:
+    - fc
 
   fix:
     desc: "Fix E2E test"
     dir: e2e
     cmds:
       - task: fmt
+
+  check:
+    desc: "Format and run E2E tests"
+    dir: e2e
+    cmds:
+      - task: fmt:check
+      - task: test
 
   fmt:
     desc: "Format E2E test code with Prettier"

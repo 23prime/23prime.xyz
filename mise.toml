@@ -21,3 +21,4 @@ pnpm = "latest"
 
 # Infrastructure
 terraform = "latest"
+lefthook = "latest"
