@@ -4,11 +4,24 @@ env:
   AWS_PROFILE: "default"
 
 tasks:
+  fix-and-check:
+    desc: "Fix and check Terraform configuration"
+    cmds:
+      - task: fix
+      - task: check
+  aliases:
+    - fc
+
+  fix:
+    desc: "Fix Terraform"
+    dir: infrastructure
+    cmds:
+      - task: fmt
+
   check:
     desc: "Check Terraform configuration"
     dir: infrastructure
     cmds:
-      - task: fix
       - task: validate
       - task: fmt:check
 
@@ -65,12 +78,6 @@ tasks:
     dir: infrastructure
     cmds:
       - terraform fmt -check -recursive
-
-  fix:
-    desc: "Fix Terraform"
-    dir: infrastructure
-    cmds:
-      - task: fmt
 
   output:
     desc: "Show Terraform outputs"
