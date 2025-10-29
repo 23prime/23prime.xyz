@@ -15,10 +15,10 @@ shellcheck = "latest"
 
 # Other tools
 fzf = "latest"
+lefthook = "latest"
 
 # Frontend
 pnpm = "latest"
 
 # Infrastructure
 terraform = "latest"
-lefthook = "latest"
