@@ -14,7 +14,6 @@ actionlint = "latest"
 shellcheck = "latest"
 
 # Other tools
-fzf = "latest"
 lefthook = "latest"
 
 # Frontend
