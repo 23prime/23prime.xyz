@@ -26,6 +26,7 @@ tasks:
     desc: "Setup project"
     cmds:
       - task: mise:setup
+      - task: yml:setup
     aliases:
       - s
 
@@ -37,6 +38,13 @@ tasks:
       - mv {{.FILE_NAME}} {{.FILE_NAME}}.jsonc
       - defer: mv {{.FILE_NAME}}.jsonc {{.FILE_NAME}}
       - biome format --write {{.FILE_NAME}}.jsonc
+
+  update:
+    desc: "Update project dependencies"
+    cmds:
+      - task: mise:update
+    aliases:
+      - u
 
   check:
     desc: "Check"
