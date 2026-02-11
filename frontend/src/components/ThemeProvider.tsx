@@ -1,12 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-export const THEMES = {
-  LIGHT: "light",
-  DARK: "dark",
-  SYSTEM: "system",
-} as const;
-
-export type Theme = (typeof THEMES)[keyof typeof THEMES];
+import { THEMES, type Theme } from "./theme";
 
 type ThemeProviderProps = {
   children: React.ReactNode;

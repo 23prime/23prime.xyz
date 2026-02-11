@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { ThemeProvider, THEMES } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { THEMES } from "@/components/theme";
 import { Layout } from "@/components/Layout";
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
