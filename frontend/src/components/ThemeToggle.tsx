@@ -1,4 +1,5 @@
-import { useTheme, THEMES, type Theme } from "./ThemeProvider";
+import { useTheme } from "./ThemeProvider";
+import { THEMES, type Theme } from "./theme";
 import { Button } from "@/components/ui/button";
 
 const THEME_CONFIG: Record<Theme, { icon: string; label: string; next: Theme }> = {
