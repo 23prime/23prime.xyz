@@ -15,8 +15,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - After editing frontend code → `task front:check`
 - After editing infrastructure code → `task infra:check`
 - After editing E2E test code → `task e2e:test`
-- After editing YAML files → `task yml:check`
-- After editing JSON files → `task json:check`
 - After editing Markdown files → `task md:check`
 - For comprehensive checks → `task check`
 
@@ -130,9 +128,7 @@ task front:dev
 ### Checks
 
 ```bash
-task check          # Run all checks (YAML, JSON, Markdown, GitHub Actions, Frontend, Infrastructure)
-task yml:check      # Check YAML files
-task json:check     # Check JSON files
+task check          # Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
 task md:check       # Check Markdown files
 task gh:check       # Check GitHub Actions workflows
 ```
@@ -240,7 +236,6 @@ All tools are managed by mise (defined in `mise.toml`):
 
 - pnpm (latest)
 - terraform (latest)
-- biome (latest)
-- actionlint, shellcheck, yamllint, markdownlint-cli
+- actionlint, shellcheck, markdownlint-cli
 
 Run `task setup` to install all tools.

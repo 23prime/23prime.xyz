@@ -2,8 +2,6 @@ version: "3"
 
 includes:
   mise: tasks/MiseTasks.yml
-  yml: tasks/YamlTasks.yml
-  json: tasks/JsonTasks.yml
   md: tasks/MarkdownTasks.yml
   gh: tasks/GitHubTasks.yml
   front: tasks/FrontendTasks.yml
@@ -26,18 +24,8 @@ tasks:
     desc: "Setup project"
     cmds:
       - task: mise:setup
-      - task: yml:setup
     aliases:
       - s
-
-  code-workspace:fmt:
-    desc: "Format .code-workspace file"
-    vars:
-      FILE_NAME: "23prime.xyz.code-workspace"
-    cmds:
-      - mv {{.FILE_NAME}} {{.FILE_NAME}}.jsonc
-      - defer: mv {{.FILE_NAME}}.jsonc {{.FILE_NAME}}
-      - biome format --write {{.FILE_NAME}}.jsonc
 
   update:
     desc: "Update project dependencies"
@@ -49,8 +37,6 @@ tasks:
   check:
     desc: "Check"
     deps:
-      - yml:check
-      - json:check
       - md:check
       - gh:check
       - front:check
@@ -62,8 +48,6 @@ tasks:
   fix-and-check:
     desc: "Fix and check"
     deps:
-      - yml:check
-      - json:fix-and-check
       - md:fix-and-check
       - gh:check
       - front:fix-and-check
