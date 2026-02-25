@@ -101,12 +101,10 @@ task list
 
 Common tasks:
 
-- `task check` - Run all checks (YAML, JSON, Markdown, GitHub Actions, Frontend, Infrastructure)
+- `task check` - Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
 - `task setup` - Setup project and install tools
 - `task md:check` - Check Markdown files
 - `task md:fix` - Auto-fix Markdown issues
-- `task yml:check` - Check YAML files
-- `task json:check` - Check JSON files
 - `task gh:check` - Check GitHub Actions workflows
 
 Frontend tasks:
