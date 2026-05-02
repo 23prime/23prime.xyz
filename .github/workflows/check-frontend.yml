@@ -5,10 +5,12 @@ on:
     paths:
       - "frontend/**"
       - ".github/workflows/check-frontend.yml"
+      - "mise.lock"
   pull_request:
     paths:
       - "frontend/**"
       - ".github/workflows/check-frontend.yml"
+      - "mise.lock"
 
 permissions: {}
 

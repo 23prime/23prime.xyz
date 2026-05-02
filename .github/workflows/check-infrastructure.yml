@@ -5,10 +5,12 @@ on:
     paths:
       - "infrastructure/**"
       - ".github/workflows/check-infrastructure.yml"
+      - "mise.lock"
   pull_request:
     paths:
       - "infrastructure/**"
       - ".github/workflows/check-infrastructure.yml"
+      - "mise.lock"
 
 permissions: {}
 
