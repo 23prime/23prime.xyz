@@ -2,31 +2,36 @@ name: Check GitHub workflow
 
 on:
   push:
+    branches:
+      - main
     paths:
       - ".github/workflows/*.yml"
+      - "mise.lock"
   pull_request:
     paths:
       - ".github/workflows/*.yml"
+      - "mise.lock"
+
+permissions: {}
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Install mise and setup
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
         with:
           install: true
-          install_args: "actionlint shellcheck"
+          install_args: "actionlint shellcheck zizmor"
           cache: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check
-        run: task gh:check
+        run: mise gh-check

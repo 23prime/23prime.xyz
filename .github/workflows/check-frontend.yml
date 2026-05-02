@@ -10,40 +10,38 @@ on:
       - "frontend/**"
       - ".github/workflows/check-frontend.yml"
 
-permissions:
-  contents: write
+permissions: {}
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Install mise and setup
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
         with:
           install: true
-          install_args: "pnpm"
+          install_args: "node pnpm"
           cache: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
-        run: task front:install
+        run: mise fe-install
 
       - name: Fix
-        run: task front:fix
+        run: mise fe-fix
 
       - name: Commit and Push
-        uses: 23prime/simple-commit-and-push@v1
+        uses: 23prime/simple-commit-and-push@15fb653b9591afde3bffb82a906a9af2aede1616 # v1.0.0
         with:
-          commit-message: "Auto fix code by `task front:fix`"
+          commit-message: "Auto fix by workflow"
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check
-        run: task front:check
+        run: mise fe-check
