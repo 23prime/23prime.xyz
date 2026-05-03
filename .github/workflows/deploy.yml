@@ -9,48 +9,50 @@ on:
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
-permissions:
-  id-token: write
-  contents: read
+permissions: {}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Install mise and setup
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
         with:
           install: true
-          install_args: "pnpm"
+          install_args: "node pnpm"
           cache: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
-        run: task front:install
+        run: mise fe-install
 
       - name: Build
-        run: task front:build
+        run: mise fe-build
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@ec61189d14ec14c8efccab744f656cffd0e33f37 # v6.1.0
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: ap-northeast-1
 
       - name: Deploy to S3
         run: |
-          aws s3 sync frontend/dist/ "s3://${{ vars.S3_BUCKET_NAME }}/" --delete
+          aws s3 sync frontend/dist/ "s3://${VARS_S3_BUCKET_NAME}/" --delete
+        env:
+          VARS_S3_BUCKET_NAME: ${{ vars.S3_BUCKET_NAME }}
 
       - name: Invalidate CloudFront
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --distribution-id "${VARS_CLOUDFRONT_DISTRIBUTION_ID}" \
             --paths "/*"
+        env:
+          VARS_CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}

@@ -10,21 +10,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Important: Task Command Usage
 
-**ALWAYS use `task` commands for formatting and checks after making changes:**
+**ALWAYS use `mise` tasks for formatting and checks after making changes:**
 
-- After editing frontend code → `task front:check`
-- After editing infrastructure code → `task infra:check`
-- After editing E2E test code → `task e2e:test`
-- After editing Markdown files → `task md:check`
-- For comprehensive checks → `task check`
+- After editing frontend code → `mise fe-check`
+- After editing infrastructure code → `mise infra-check`
+- After editing E2E test code → `mise e2e-check`
+- After editing Markdown files → `mise md-check`
+- For comprehensive checks → `mise check`
 
-**DO NOT** run individual commands like `terraform fmt`, `pnpm lint`, etc. directly. Always use the corresponding `task` command to ensure consistency.
+**DO NOT** run individual commands like `terraform fmt`, `pnpm lint`, etc. directly. Always use the corresponding `mise` task to ensure consistency.
 
 ## UI Verification Workflow
 
 **When making UI-related changes to the frontend:**
 
-1. Run `task front:check` to verify code quality
+1. Run `mise fe-check` to verify code quality
 2. Use Chrome DevTools MCP or Playwright MCP to verify the UI works correctly:
    - Navigate to `http://localhost:5173` (ensure dev server is running)
    - Take screenshots to verify visual appearance
@@ -39,7 +39,7 @@ This ensures both code quality and user-facing functionality are validated befor
 
 ## Architecture Overview
 
-This is a personal homepage project with a **React SPA frontend** deployed to **AWS S3 + CloudFront** using **Terraform**. The project uses **Taskfile** for task automation and **mise** for tool version management.
+This is a personal homepage project with a **React SPA frontend** deployed to **AWS S3 + CloudFront** using **Terraform**. The project uses **mise** for both tool version management and task automation.
 
 ### Key Architectural Decisions
 
@@ -62,26 +62,26 @@ This is a personal homepage project with a **React SPA frontend** deployed to **
    - Tests run against local dev server or production
    - Configurable base URL via environment variable
 
-5. **Tool Management**: mise installs all tools (terraform, pnpm, actionlint, etc.) defined in `mise.toml`
+5. **Tool Management**: mise installs all tools (terraform, pnpm, actionlint, etc.) and runs all tasks defined in `mise.toml`
 
 ## Common Commands
 
 ### Setup
 
 ```bash
-task setup          # Install all tools via mise
+mise setup          # Install all tools and configure hooks
 ```
 
 ### Frontend Development
 
 ```bash
-task front:dev           # Start dev server (http://localhost:5173)
-task front:build         # Build for production
-task front:deps:add -- pkg # Add frontend dependencies
-task front:deps:add:dev -- pkg # Add frontend dev dependencies
-task front:check         # Run linter + type-check
-task front:lint:fix      # Auto-fix ESLint issues
-task front:add-component -- button  # Add shadcn/ui component
+mise fe-dev              # Start dev server (http://localhost:5173)
+mise fe-build            # Build for production
+mise fe-deps-add pkg     # Add frontend dependencies
+mise fe-deps-add-dev pkg # Add frontend dev dependencies
+mise fe-check            # Run linter + type-check + build
+mise fe-lint-fix         # Auto-fix ESLint issues
+mise fe-add-component button  # Add shadcn/ui component
 ```
 
 Or use pnpm directly in `frontend/`:
@@ -98,39 +98,39 @@ pnpm lint
 **Important**: All Terraform commands use `aws-vault exec default` for credential management. The S3 backend bucket must exist before running `terraform init`.
 
 ```bash
-task infra:init     # Initialize Terraform (requires aws-vault)
-task infra:check    # Format + validate
-task infra:plan     # Show execution plan
-task infra:apply    # Apply changes
-task infra:output   # Show outputs (bucket name, CloudFront domain, etc.)
+mise infra-init     # Initialize Terraform (requires aws-vault)
+mise infra-check    # Format + validate
+mise infra-plan     # Show execution plan
+mise infra-apply    # Apply changes
+mise infra-output   # Show outputs (bucket name, CloudFront domain, etc.)
 ```
 
 ### E2E Testing
 
 ```bash
-task e2e:install         # Install E2E dependencies and browsers
-task e2e:deps:add -- pkg # Add E2E dependencies
-task e2e:deps:add:dev -- pkg # Add E2E dev dependencies
-task e2e:test            # Run E2E tests (requires dev server running)
-task e2e:test:ui         # Run tests in UI mode
-task e2e:test:debug      # Run tests in debug mode
-task e2e:test:headed     # Run tests with browser visible
-task e2e:test:prod       # Run tests against production (https://23prime.xyz)
-task e2e:report          # Show test report
+mise e2e-install         # Install E2E dependencies and browsers
+mise e2e-deps-add pkg    # Add E2E dependencies
+mise e2e-deps-add-dev pkg # Add E2E dev dependencies
+mise e2e-test            # Run E2E tests (requires dev server running)
+mise e2e-test-ui         # Run tests in UI mode
+mise e2e-test-debug      # Run tests in debug mode
+mise e2e-test-headed     # Run tests with browser visible
+mise e2e-test-prod       # Run tests against production (https://23prime.xyz)
+mise e2e-report          # Show test report
 ```
 
 **Important**: Before running E2E tests, start the frontend dev server in another terminal:
 
 ```bash
-task front:dev
+mise fe-dev
 ```
 
 ### Checks
 
 ```bash
-task check          # Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
-task md:check       # Check Markdown files
-task gh:check       # Check GitHub Actions workflows
+mise check          # Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
+mise md-check       # Check Markdown files
+mise gh-check       # Check GitHub Actions workflows
 ```
 
 ## Project Structure
@@ -153,7 +153,7 @@ task gh:check       # Check GitHub Actions workflows
 │   ├── cloudfront.tf      # CloudFront distribution, OAC, custom error responses
 │   ├── variables.tf       # Input variables
 │   └── outputs.tf         # Outputs (bucket name, CloudFront domain, etc.)
-└── tasks/                 # Taskfile task definitions (Frontend, Infrastructure, E2E, etc.)
+└── mise.toml              # Tool versions and task definitions
 ```
 
 ## Infrastructure Details
@@ -212,7 +212,7 @@ Push to `main` branch triggers GitHub Actions:
 ### Manual
 
 ```bash
-task front:build
+mise fe-build
 cd infrastructure
 BUCKET_NAME=$(terraform output -raw s3_bucket_name)
 DIST_ID=$(terraform output -raw cloudfront_distribution_id)
@@ -234,8 +234,9 @@ The workflow uses AWS OIDC authentication, so no long-lived AWS credentials (sec
 
 All tools are managed by mise (defined in `mise.toml`):
 
-- pnpm (latest)
-- terraform (latest)
-- actionlint, shellcheck, markdownlint-cli
+- node, pnpm
+- terraform
+- actionlint, shellcheck, zizmor, markdownlint-cli2
+- lefthook, gitleaks
 
-Run `task setup` to install all tools.
+Run `mise setup` to install all tools.

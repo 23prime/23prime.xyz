@@ -5,42 +5,50 @@ on:
     paths:
       - "infrastructure/**"
       - ".github/workflows/check-infrastructure.yml"
+      - "mise.lock"
   pull_request:
     paths:
       - "infrastructure/**"
       - ".github/workflows/check-infrastructure.yml"
+      - "mise.lock"
 
-permissions:
-  contents: write
+permissions: {}
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Install mise and setup
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
         with:
           install: true
-          install_args: "terraform"
           cache: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      # Workaround for https://github.com/jdx/mise-action/issues/175
+      # The asdf:terraform backend installs the binary at the root of the install dir,
+      # but mise env reports the /bin subdirectory in PATH. Create a symlink to fix this.
+      - name: Fix terraform bin path
+        run: |
+          INSTALL_DIR=$(find ~/.local/share/mise/installs/terraform -maxdepth 1 -mindepth 1 -type d | head -1)
+          mkdir -p "${INSTALL_DIR}/bin"
+          ln -sf "${INSTALL_DIR}/terraform" "${INSTALL_DIR}/bin/terraform"
+
       - name: Fix
-        run: task infra:fmt
+        run: mise infra-fmt
 
       - name: Commit and Push
-        uses: 23prime/simple-commit-and-push@v1
+        uses: 23prime/simple-commit-and-push@15fb653b9591afde3bffb82a906a9af2aede1616 # v1.0.0
         with:
-          commit-message: "Auto fix code by `task infra:fmt`"
+          commit-message: "Auto fix by workflow"
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check
-        run: task infra:fmt:check
+        run: mise infra-fmt-check

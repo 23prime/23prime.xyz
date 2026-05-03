@@ -7,7 +7,7 @@ updates:
     schedule:
       interval: "daily"
     cooldown:
-      default-days: 3
+      default-days: 7
     groups:
       github-actions:
         patterns:
@@ -23,7 +23,7 @@ updates:
     schedule:
       interval: "daily"
     cooldown:
-      default-days: 3
+      default-days: 7
     open-pull-requests-limit: 3
     commit-message:
       prefix: "infra"
@@ -75,11 +75,11 @@ updates:
     ignore:
       # Ignore major version updates for breaking changes
       - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
+        update-types: [ "version-update:semver-major" ]
       - dependency-name: "react-dom"
-        update-types: ["version-update:semver-major"]
+        update-types: [ "version-update:semver-major" ]
       - dependency-name: "typescript"
-        update-types: ["version-update:semver-major"]
+        update-types: [ "version-update:semver-major" ]
 
   # npm (e2e) dependencies
   - package-ecosystem: "npm"

@@ -1,16 +1,299 @@
+# ================================================================
+# Settings
+# ================================================================
+[settings]
+auto_install = false
+minimum_release_age = "3d"
+
+
+# ================================================================
+# Tools
+# ================================================================
 [tools]
+
+# Node.js
+node = "25"
+
 # Markdown
-markdownlint-cli2 = "latest"
+markdownlint-cli2 = "0.22"
 
 # GitHub Actions
-actionlint = "latest"
-shellcheck = "latest"
+actionlint = "1"
+shellcheck = "0.11"
+zizmor = "1"
 
 # Other tools
-lefthook = "latest"
+lefthook = "2"
+gitleaks = "8"
 
 # Frontend
-pnpm = "latest"
+pnpm = "10"
 
 # Infrastructure
-terraform = "latest"
+terraform = "1"
+
+
+# ================================================================
+# Tasks
+# See: https://mise.jdx.dev/tasks/toml-tasks.html
+# ================================================================
+
+# Global
+[tasks.setup]
+description = "Setup tools"
+run = ["mise trust -yq", "mise install", "lefthook install"]
+alias = "s"
+
+[tasks.fix]
+description = "Fix all issues"
+depends = ["md-fix", "gh-fix", "fe-fix", "infra-fix", "e2e-fix"]
+alias = "f"
+
+[tasks.check]
+description = "Check for all issues"
+depends = ["md-check", "gh-check", "fe-check", "infra-check", "e2e-check"]
+alias = "c"
+
+[tasks.fix-and-check]
+run = [{ task = "fix" }, { task = "check" }]
+description = "Fix all issues and check for issues"
+alias = "fc"
+
+# Markdown
+[tasks.md-fix]
+description = "Fix Markdown issues"
+run = "markdownlint-cli2 '**/*.md' --fix"
+alias = "mf"
+
+[tasks.md-check]
+description = "Check for Markdown issues"
+run = "markdownlint-cli2 '**/*.md'"
+alias = "mc"
+
+# GitHub Actions
+[tasks.gh-fix]
+description = "Fix GitHub Actions workflows"
+run = "zizmor --fix=all ."
+alias = "ghf"
+
+[tasks.gh-check]
+description = "Check GitHub Actions workflows"
+run = [
+  "actionlint .github/workflows/*.yml",
+  "zizmor . --persona=pedantic --min-severity=medium",
+]
+alias = "ghc"
+
+# Secrets
+[tasks.gitleaks-check]
+description = "Check for leaked secrets"
+run = "gitleaks git --redact --no-banner"
+alias = "glc"
+
+[tasks.gitleaks-protect]
+description = "Check staged files for leaked secrets"
+run = "gitleaks git --pre-commit --redact --no-banner"
+alias = "glp"
+
+# Frontend
+[tasks.fe-install]
+description = "Install frontend dependencies"
+dir = "frontend"
+run = "pnpm install"
+
+[tasks.fe-deps-add]
+description = "Add frontend dependencies"
+dir = "frontend"
+run = "pnpm add $@"
+
+[tasks.fe-deps-add-dev]
+description = "Add frontend dev dependencies"
+dir = "frontend"
+run = "pnpm add -D $@"
+
+[tasks.fe-dev]
+description = "Start frontend dev server"
+dir = "frontend"
+run = "pnpm dev"
+
+[tasks.fe-build]
+description = "Build frontend for production"
+dir = "frontend"
+run = "pnpm build"
+
+[tasks.fe-preview]
+description = "Preview frontend production build"
+dir = "frontend"
+run = "pnpm preview"
+
+[tasks.fe-fix]
+description = "Fix frontend issues"
+dir = "frontend"
+run = ["pnpm format", "pnpm lint --fix"]
+
+[tasks.fe-check]
+description = "Check frontend for issues"
+dir = "frontend"
+run = ["pnpm exec tsc -b", "pnpm lint", "pnpm format:check", "pnpm build"]
+
+[tasks.fe-lint]
+description = "Run ESLint"
+dir = "frontend"
+run = "pnpm lint"
+
+[tasks.fe-lint-fix]
+description = "Run ESLint with auto-fix"
+dir = "frontend"
+run = "pnpm lint --fix"
+
+[tasks.fe-fmt]
+description = "Format frontend code with Prettier"
+dir = "frontend"
+run = "pnpm format"
+
+[tasks.fe-fmt-check]
+description = "Check frontend code formatting"
+dir = "frontend"
+run = "pnpm format:check"
+
+[tasks.fe-type-check]
+description = "Run TypeScript type checking"
+dir = "frontend"
+run = "pnpm exec tsc -b"
+
+[tasks.fe-clean]
+description = "Clean frontend build artifacts"
+dir = "frontend"
+run = "rm -rf dist node_modules/.vite"
+
+[tasks.fe-add-component]
+description = "Add shadcn/ui component"
+dir = "frontend"
+run = "pnpm dlx shadcn@latest add $@"
+
+# Infrastructure
+[tasks.infra-fix]
+description = "Fix Terraform formatting"
+dir = "infrastructure"
+run = "terraform fmt -recursive"
+
+[tasks.infra-check]
+description = "Check Terraform configuration"
+dir = "infrastructure"
+run = ["terraform validate", "terraform fmt -check -recursive"]
+
+[tasks.infra-init]
+description = "Initialize Terraform"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform init"
+
+[tasks.infra-init-migrate]
+description = "Initialize Terraform and migrate state"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform init -migrate-state"
+
+[tasks.infra-init-upgrade]
+description = "Initialize Terraform and upgrade modules"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform init -upgrade"
+
+[tasks.infra-plan]
+description = "Plan Terraform changes"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform plan"
+
+[tasks.infra-apply]
+description = "Apply Terraform changes"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform apply"
+
+[tasks.infra-destroy]
+description = "Destroy Terraform infrastructure"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform destroy"
+
+[tasks.infra-validate]
+description = "Validate Terraform configuration"
+dir = "infrastructure"
+run = "terraform validate"
+
+[tasks.infra-fmt]
+description = "Format Terraform files"
+dir = "infrastructure"
+run = "terraform fmt -recursive"
+
+[tasks.infra-fmt-check]
+description = "Check Terraform formatting"
+dir = "infrastructure"
+run = "terraform fmt -check -recursive"
+
+[tasks.infra-output]
+description = "Show Terraform outputs"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform output"
+
+[tasks.infra-state]
+description = "Show Terraform state"
+dir = "infrastructure"
+run = "aws-vault exec default -- terraform show"
+
+[tasks.infra-version]
+description = "Show Terraform version"
+run = "terraform version"
+
+# E2E testing
+[tasks.e2e-install]
+description = "Install E2E dependencies and browsers"
+dir = "e2e"
+run = ["pnpm install", "pnpm exec playwright install chromium"]
+
+[tasks.e2e-deps-add]
+description = "Add E2E dependencies"
+dir = "e2e"
+run = "pnpm add $@"
+
+[tasks.e2e-deps-add-dev]
+description = "Add E2E dev dependencies"
+dir = "e2e"
+run = "pnpm add -D $@"
+
+[tasks.e2e-test]
+description = "Run E2E tests"
+dir = "e2e"
+run = "pnpm test"
+
+[tasks.e2e-test-ui]
+description = "Run E2E tests in UI mode"
+dir = "e2e"
+run = "pnpm run test:ui"
+
+[tasks.e2e-test-debug]
+description = "Run E2E tests in debug mode"
+dir = "e2e"
+run = "pnpm run test:debug"
+
+[tasks.e2e-test-headed]
+description = "Run E2E tests with browser visible"
+dir = "e2e"
+run = "pnpm run test:headed"
+
+[tasks.e2e-test-prod]
+description = "Run E2E tests against production"
+dir = "e2e"
+env = { BASE_URL = "https://23prime.xyz" }
+run = "pnpm test"
+
+[tasks.e2e-report]
+description = "Show E2E test report"
+dir = "e2e"
+run = "pnpm run report"
+
+[tasks.e2e-fix]
+description = "Fix E2E test code formatting"
+dir = "e2e"
+run = "pnpm run format"
+
+[tasks.e2e-check]
+description = "Check E2E test code formatting"
+dir = "e2e"
+run = "pnpm run format:check"
