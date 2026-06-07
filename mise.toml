@@ -99,7 +99,7 @@ alias = "glp"
 [tasks.fe-install]
 description = "Install frontend dependencies"
 dir = "frontend"
-run = "pnpm install"
+run = "pnpm install --frozen-lockfile "
 
 [tasks.fe-deps-add]
 description = "Add frontend dependencies"
@@ -245,7 +245,10 @@ run = "terraform version"
 [tasks.e2e-install]
 description = "Install E2E dependencies and browsers"
 dir = "e2e"
-run = ["pnpm install", "pnpm exec playwright install chromium"]
+run = [
+  "pnpm install --frozen-lockfile ",
+  "pnpm exec playwright install chromium",
+]
 
 [tasks.e2e-deps-add]
 description = "Add E2E dependencies"
