@@ -27,7 +27,7 @@ lefthook = "2"
 gitleaks = "8"
 
 # Frontend
-pnpm = "10"
+pnpm = "11"
 
 # Infrastructure
 terraform = "1"
