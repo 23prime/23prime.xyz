@@ -1,3 +1,6 @@
+overrides:
+  semver@6: "^7.0.0"
+
 blockExoticSubdeps: true
 
 ignoredBuiltDependencies:
