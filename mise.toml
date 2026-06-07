@@ -100,6 +100,13 @@ alias = "glp"
 description = "Install frontend dependencies"
 dir = "frontend"
 run = "pnpm install --frozen-lockfile "
+alias = "fi"
+
+[tasks.fe-clean-install]
+description = "Rebuild frontend lockfile and install dependencies"
+dir = "frontend"
+run = ["pnpm clean --lockfile", "pnpm install"]
+alias = "fci"
 
 [tasks.fe-deps-add]
 description = "Add frontend dependencies"
@@ -249,6 +256,17 @@ run = [
   "pnpm install --frozen-lockfile ",
   "pnpm exec playwright install chromium",
 ]
+alias = "ei"
+
+[tasks.e2e-clean-install]
+description = "Rebuild E2E lockfile and install dependencies and browsers"
+dir = "e2e"
+run = [
+  "pnpm clean --lockfile",
+  "pnpm install",
+  "pnpm exec playwright install chromium",
+]
+alias = "eci"
 
 [tasks.e2e-deps-add]
 description = "Add E2E dependencies"
