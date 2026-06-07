@@ -216,6 +216,10 @@ url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellche
 version = "1.14.8"
 backend = "asdf:terraform"
 
+[tools.terraform."platforms.linux-x64"]
+checksum = "sha256:56a5d12f47cbc1c6bedb8f5426ae7d5df984d1929572c24b56f4c82e9f9bf709"
+url = "https://releases.hashicorp.com/terraform/1.14.8/terraform_1.14.8_linux_amd64.zip"
+
 [[tools.zizmor]]
 version = "1.24.1"
 backend = "aqua:zizmorcore/zizmor"
