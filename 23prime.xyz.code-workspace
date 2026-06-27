@@ -2,19 +2,19 @@
   "folders": [
     {
       "name": "Root",
-      "path": ".",
+      "path": "."
     },
     {
       "name": "Frontend",
-      "path": "./frontend",
+      "path": "./frontend"
     },
     {
       "name": "Infrastructure",
-      "path": "./infrastructure",
+      "path": "./infrastructure"
     },
     {
       "name": "E2E",
-      "path": "./e2e",
+      "path": "./e2e"
     }
   ],
 
@@ -23,31 +23,31 @@
     "search.exclude": {
       "**/node_modules": true,
       "**/tmp": true,
-      "**/vendor": true,
+      "**/vendor": true
     },
 
     // File associations
     "files.associations": {
       "*.tfvars*": "terraform-vars",
-      "*.code-workspace": "jsonc",
+      "*.code-workspace": "jsonc"
     },
 
     // YAML
     // Note: This YAML settings must be placed in this file, not in .vscode/settings.json of root folder.
     "yaml.format.enable": true,
     "yaml.schemas": {
-      "https://json.schemastore.org/taskfile.json": "tasks/*.yml",
+      "https://json.schemastore.org/taskfile.json": "tasks/*.yml"
     },
 
     // Terraform
     "[terraform]": {
       "editor.defaultFormatter": "hashicorp.terraform",
-      "editor.formatOnSave": true,
+      "editor.formatOnSave": true
     },
     "[terraform-vars]": {
       "editor.defaultFormatter": "hashicorp.terraform",
-      "editor.formatOnSave": true,
+      "editor.formatOnSave": true
     },
-    "terraform.experimentalFeatures.validateOnSave": true,
-  },
+    "terraform.experimentalFeatures.validateOnSave": true
+  }
 }
