@@ -34,4 +34,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check
-        run: mise gh-check
+        run: mise run gh-check

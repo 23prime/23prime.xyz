@@ -32,10 +32,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
-        run: mise fe-install
+        run: mise run fe-install
 
       - name: Build
-        run: mise fe-build
+        run: mise run fe-build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0

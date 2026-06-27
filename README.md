@@ -77,7 +77,7 @@ My page.
 1. Run the setup task:
 
 ```bash
-mise setup
+mise run setup
 ```
 
 This will install all necessary tools defined in `mise.toml`.
@@ -87,10 +87,10 @@ This will install all necessary tools defined in `mise.toml`.
 ### Common Tasks
 
 ```bash
-mise check       # Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
-mise md-check    # Check Markdown files
-mise md-fix      # Auto-fix Markdown issues
-mise gh-check    # Check GitHub Actions workflows
+mise run check       # Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
+mise run md-check    # Check Markdown files
+mise run md-fix      # Auto-fix Markdown issues
+mise run gh-check    # Check GitHub Actions workflows
 ```
 
 ### Frontend Development
@@ -100,7 +100,7 @@ mise gh-check    # Check GitHub Actions workflows
 Start the development server:
 
 ```bash
-mise fe-dev
+mise run fe-dev
 ```
 
 Or using pnpm directly:
@@ -115,14 +115,14 @@ The application will be available at `http://localhost:5173`.
 
 #### Frontend Commands
 
-- `mise fe-dev` - Start development server
-- `mise fe-build` - Build for production
-- `mise fe-preview` - Preview production build
-- `mise fe-check` - Run lint and type-check
-- `mise fe-lint` - Run ESLint
-- `mise fe-lint-fix` - Auto-fix ESLint issues
-- `mise fe-type-check` - Run TypeScript type checking
-- `mise fe-clean` - Clean build artifacts
+- `mise run fe-dev` - Start development server
+- `mise run fe-build` - Build for production
+- `mise run fe-preview` - Preview production build
+- `mise run fe-check` - Run lint and type-check
+- `mise run fe-lint` - Run ESLint
+- `mise run fe-lint-fix` - Auto-fix ESLint issues
+- `mise run fe-type-check` - Run TypeScript type checking
+- `mise run fe-clean` - Clean build artifacts
 
 Using pnpm directly:
 
@@ -145,7 +145,7 @@ import { cn } from '@/lib/utils'
 Add shadcn/ui components:
 
 ```bash
-mise fe-add-component button
+mise run fe-add-component button
 ```
 
 Or using pnpm:
@@ -171,7 +171,7 @@ The E2E tests are in a separate, independent project to ensure they remain frame
 Install E2E test dependencies and browsers:
 
 ```bash
-mise e2e-install
+mise run e2e-install
 ```
 
 #### Running Tests
@@ -179,26 +179,26 @@ mise e2e-install
 **Prerequisites**: Start the frontend development server before running tests:
 
 ```bash
-mise fe-dev
+mise run fe-dev
 ```
 
 Then in another terminal, run tests:
 
 ```bash
 # Run all tests
-mise e2e-test
+mise run e2e-test
 
 # Run tests in UI mode (interactive)
-mise e2e-test-ui
+mise run e2e-test-ui
 
 # Run tests in debug mode
-mise e2e-test-debug
+mise run e2e-test-debug
 
 # Run tests with browser visible
-mise e2e-test-headed
+mise run e2e-test-headed
 
 # Show test report
-mise e2e-report
+mise run e2e-report
 ```
 
 #### Testing Against Production
@@ -206,7 +206,7 @@ mise e2e-report
 Test against the production website:
 
 ```bash
-mise e2e-test-prod
+mise run e2e-test-prod
 ```
 
 This sets `BASE_URL=https://23prime.xyz` and runs tests against the live site.
@@ -286,10 +286,10 @@ github_repo = "your-repo-name"
 #### Deploy Infrastructure
 
 ```bash
-mise infra-init
-mise infra-check
-mise infra-plan
-mise infra-apply
+mise run infra-init
+mise run infra-check
+mise run infra-plan
+mise run infra-apply
 ```
 
 Using Terraform directly:
@@ -305,22 +305,22 @@ terraform apply
 
 #### Infrastructure Commands
 
-- `mise infra-init` - Initialize Terraform
-- `mise infra-check` - Check configuration (format + validate)
-- `mise infra-fmt` - Format Terraform files
-- `mise infra-validate` - Validate configuration
-- `mise infra-plan` - Show execution plan
-- `mise infra-apply` - Apply configuration
-- `mise infra-output` - Show outputs
-- `mise infra-state` - Show state
-- `mise infra-destroy` - Destroy infrastructure
+- `mise run infra-init` - Initialize Terraform
+- `mise run infra-check` - Check configuration (format + validate)
+- `mise run infra-fmt` - Format Terraform files
+- `mise run infra-validate` - Validate configuration
+- `mise run infra-plan` - Show execution plan
+- `mise run infra-apply` - Apply configuration
+- `mise run infra-output` - Show outputs
+- `mise run infra-state` - Show state
+- `mise run infra-destroy` - Destroy infrastructure
 
 #### Outputs
 
 After deployment, get outputs for GitHub Actions configuration:
 
 ```bash
-mise infra-output
+mise run infra-output
 ```
 
 Outputs include:
@@ -349,7 +349,7 @@ If you need to deploy manually:
 
 ```bash
 # Build the frontend
-mise fe-build
+mise run fe-build
 
 # Get infrastructure outputs
 cd infrastructure
@@ -369,9 +369,9 @@ aws cloudfront create-invalidation \
 
 Configure the following **variables** (not secrets) in your GitHub repository (Settings → Secrets and variables → Actions → Variables):
 
-- `AWS_ROLE_ARN` - IAM role ARN from `mise infra-output` (`github_actions_role_arn`)
-- `S3_BUCKET_NAME` - S3 bucket name from `mise infra-output` (`s3_bucket_name`)
-- `CLOUDFRONT_DISTRIBUTION_ID` - CloudFront distribution ID from `mise infra-output` (`cloudfront_distribution_id`)
+- `AWS_ROLE_ARN` - IAM role ARN from `mise run infra-output` (`github_actions_role_arn`)
+- `S3_BUCKET_NAME` - S3 bucket name from `mise run infra-output` (`s3_bucket_name`)
+- `CLOUDFRONT_DISTRIBUTION_ID` - CloudFront distribution ID from `mise run infra-output` (`cloudfront_distribution_id`)
 
 The workflow uses AWS OIDC authentication, so no long-lived AWS credentials (secrets) are needed.
 

@@ -34,10 +34,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
-        run: mise fe-install
+        run: mise run fe-install
 
       - name: Fix
-        run: mise fe-fix
+        run: mise run fe-fix
 
       - name: Commit and Push
         uses: 23prime/simple-commit-and-push@15fb653b9591afde3bffb82a906a9af2aede1616 # v1.0.0
@@ -46,4 +46,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check
-        run: mise fe-check
+        run: mise run fe-check

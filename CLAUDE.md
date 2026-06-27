@@ -12,11 +12,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **ALWAYS use `mise` tasks for formatting and checks after making changes:**
 
-- After editing frontend code → `mise fe-check`
-- After editing infrastructure code → `mise infra-check`
-- After editing E2E test code → `mise e2e-check`
-- After editing Markdown files → `mise md-check`
-- For comprehensive checks → `mise check`
+- After editing frontend code → `mise run fe-check`
+- After editing infrastructure code → `mise run infra-check`
+- After editing E2E test code → `mise run e2e-check`
+- After editing Markdown files → `mise run md-check`
+- For comprehensive checks → `mise run check`
 
 **DO NOT** run individual commands like `terraform fmt`, `pnpm lint`, etc. directly. Always use the corresponding `mise` task to ensure consistency.
 
@@ -24,7 +24,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **When making UI-related changes to the frontend:**
 
-1. Run `mise fe-check` to verify code quality
+1. Run `mise run fe-check` to verify code quality
 2. Use Chrome DevTools MCP or Playwright MCP to verify the UI works correctly:
    - Navigate to `http://localhost:5173` (ensure dev server is running)
    - Take screenshots to verify visual appearance
@@ -69,19 +69,19 @@ This is a personal homepage project with a **React SPA frontend** deployed to **
 ### Setup
 
 ```bash
-mise setup          # Install all tools and configure hooks
+mise run setup          # Install all tools and configure hooks
 ```
 
 ### Frontend Development
 
 ```bash
-mise fe-dev              # Start dev server (http://localhost:5173)
-mise fe-build            # Build for production
-mise fe-deps-add pkg     # Add frontend dependencies
-mise fe-deps-add-dev pkg # Add frontend dev dependencies
-mise fe-check            # Run linter + type-check + build
-mise fe-lint-fix         # Auto-fix ESLint issues
-mise fe-add-component button  # Add shadcn/ui component
+mise run fe-dev              # Start dev server (http://localhost:5173)
+mise run fe-build            # Build for production
+mise run fe-deps-add pkg     # Add frontend dependencies
+mise run fe-deps-add-dev pkg # Add frontend dev dependencies
+mise run fe-check            # Run linter + type-check + build
+mise run fe-lint-fix         # Auto-fix ESLint issues
+mise run fe-add-component button  # Add shadcn/ui component
 ```
 
 Or use pnpm directly in `frontend/`:
@@ -98,39 +98,39 @@ pnpm lint
 **Important**: All Terraform commands use `aws-vault exec default` for credential management. The S3 backend bucket must exist before running `terraform init`.
 
 ```bash
-mise infra-init     # Initialize Terraform (requires aws-vault)
-mise infra-check    # Format + validate
-mise infra-plan     # Show execution plan
-mise infra-apply    # Apply changes
-mise infra-output   # Show outputs (bucket name, CloudFront domain, etc.)
+mise run infra-init     # Initialize Terraform (requires aws-vault)
+mise run infra-check    # Format + validate
+mise run infra-plan     # Show execution plan
+mise run infra-apply    # Apply changes
+mise run infra-output   # Show outputs (bucket name, CloudFront domain, etc.)
 ```
 
 ### E2E Testing
 
 ```bash
-mise e2e-install         # Install E2E dependencies and browsers
-mise e2e-deps-add pkg    # Add E2E dependencies
-mise e2e-deps-add-dev pkg # Add E2E dev dependencies
-mise e2e-test            # Run E2E tests (requires dev server running)
-mise e2e-test-ui         # Run tests in UI mode
-mise e2e-test-debug      # Run tests in debug mode
-mise e2e-test-headed     # Run tests with browser visible
-mise e2e-test-prod       # Run tests against production (https://23prime.xyz)
-mise e2e-report          # Show test report
+mise run e2e-install         # Install E2E dependencies and browsers
+mise run e2e-deps-add pkg    # Add E2E dependencies
+mise run e2e-deps-add-dev pkg # Add E2E dev dependencies
+mise run e2e-test            # Run E2E tests (requires dev server running)
+mise run e2e-test-ui         # Run tests in UI mode
+mise run e2e-test-debug      # Run tests in debug mode
+mise run e2e-test-headed     # Run tests with browser visible
+mise run e2e-test-prod       # Run tests against production (https://23prime.xyz)
+mise run e2e-report          # Show test report
 ```
 
 **Important**: Before running E2E tests, start the frontend dev server in another terminal:
 
 ```bash
-mise fe-dev
+mise run fe-dev
 ```
 
 ### Checks
 
 ```bash
-mise check          # Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
-mise md-check       # Check Markdown files
-mise gh-check       # Check GitHub Actions workflows
+mise run check          # Run all checks (Markdown, GitHub Actions, Frontend, Infrastructure)
+mise run md-check       # Check Markdown files
+mise run gh-check       # Check GitHub Actions workflows
 ```
 
 ## Project Structure
@@ -212,7 +212,7 @@ Push to `main` branch triggers GitHub Actions:
 ### Manual
 
 ```bash
-mise fe-build
+mise run fe-build
 cd infrastructure
 BUCKET_NAME=$(terraform output -raw s3_bucket_name)
 DIST_ID=$(terraform output -raw cloudfront_distribution_id)
@@ -239,4 +239,4 @@ All tools are managed by mise (defined in `mise.toml`):
 - actionlint, shellcheck, zizmor, markdownlint-cli2
 - lefthook, gitleaks
 
-Run `mise setup` to install all tools.
+Run `mise run setup` to install all tools.
