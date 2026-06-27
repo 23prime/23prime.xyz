@@ -10,5 +10,5 @@ pre-commit:
     - name: mise run check
       run: mise run check
 
-    - name: gitleaks protect
-      run: mise run gitleaks-protect
+    - name: secret check
+      run: mise run secret-check

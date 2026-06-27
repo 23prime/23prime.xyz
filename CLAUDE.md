@@ -237,6 +237,6 @@ All tools are managed by mise (defined in `mise.toml`):
 - node, pnpm
 - terraform
 - actionlint, shellcheck, zizmor, markdownlint-cli2
-- lefthook, gitleaks
+- lefthook, betterleaks
 
 Run `mise run setup` to install all tools.

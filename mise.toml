@@ -24,7 +24,7 @@ zizmor = "1.26.1"
 
 # Other tools
 lefthook = "2"
-gitleaks = "8"
+betterleaks = "1"
 
 # Frontend
 pnpm = "11"
@@ -85,15 +85,15 @@ run = [
 alias = "ghc"
 
 # Secrets
-[tasks.gitleaks-check]
-description = "Check for leaked secrets"
-run = "gitleaks git --redact --no-banner"
-alias = "glc"
-
-[tasks.gitleaks-protect]
+[tasks.secret-check]
 description = "Check staged files for leaked secrets"
-run = "gitleaks git --pre-commit --redact --no-banner"
-alias = "glp"
+run = "betterleaks git --pre-commit --redact --no-banner"
+alias = "scc"
+
+[tasks.secret-check-all]
+description = "Check for leaked secrets"
+run = "betterleaks git --redact --no-banner"
+alias = "sca"
 
 # Frontend
 [tasks.fe-install]
