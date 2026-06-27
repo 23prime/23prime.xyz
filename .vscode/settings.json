@@ -27,7 +27,7 @@
   },
 
   // Dictionary for spell checker
-  "cSpell.words": ["shellcheck", "Taskfile"],
+  "cSpell.words": ["shellcheck"],
 
   // Exclude folders defined as workspace folders
   "files.exclude": {

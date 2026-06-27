@@ -35,9 +35,6 @@
     // YAML
     // Note: This YAML settings must be placed in this file, not in .vscode/settings.json of root folder.
     "yaml.format.enable": true,
-    "yaml.schemas": {
-      "https://json.schemastore.org/taskfile.json": "tasks/*.yml"
-    },
 
     // Terraform
     "[terraform]": {

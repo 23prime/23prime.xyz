@@ -48,7 +48,7 @@ export default defineConfig({
   webServer: {
     name: "Frontend",
     cwd: "../",
-    command: "task front:dev",
+    command: "mise fe-dev",
     url: "http://localhost:5173",
     reuseExistingServer: !process.env.CI,
     stdout: "pipe",
