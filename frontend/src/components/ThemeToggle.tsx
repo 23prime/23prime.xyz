@@ -3,10 +3,10 @@ import { useTheme } from "./ThemeProvider";
 import { THEMES, type Theme } from "./theme";
 import { Button } from "@/components/ui/button";
 
-const THEME_CONFIG: Record<Theme, { icon: string; next: Theme }> = {
-  [THEMES.LIGHT]: { icon: "☀️", next: THEMES.DARK },
-  [THEMES.DARK]: { icon: "🌙", next: THEMES.SYSTEM },
-  [THEMES.SYSTEM]: { icon: "💻", next: THEMES.LIGHT },
+const THEME_CONFIG: Record<Theme, { icon: string; next: Theme; labelKey: string }> = {
+  [THEMES.LIGHT]: { icon: "☀️", next: THEMES.DARK, labelKey: "theme.light" },
+  [THEMES.DARK]: { icon: "🌙", next: THEMES.SYSTEM, labelKey: "theme.dark" },
+  [THEMES.SYSTEM]: { icon: "💻", next: THEMES.LIGHT, labelKey: "theme.system" },
 };
 
 export function ThemeToggle() {
@@ -14,7 +14,7 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   const themeConfig = THEME_CONFIG[theme];
-  const label = t(`theme.${theme}`);
+  const label = t(themeConfig.labelKey);
 
   const toggleTheme = () => {
     setTheme(themeConfig.next);

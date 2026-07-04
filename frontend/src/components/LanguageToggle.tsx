@@ -10,7 +10,7 @@ const NEXT_LANGUAGE: Record<Language, Language> = {
 export function LanguageToggle() {
   const { t, i18n } = useTranslation();
 
-  const currentLanguage = (i18n.resolvedLanguage ?? LANGUAGES.EN) as Language;
+  const currentLanguage: Language = i18n.resolvedLanguage === LANGUAGES.JA ? LANGUAGES.JA : LANGUAGES.EN;
   const label = t(`language.${currentLanguage}`);
 
   const toggleLanguage = () => {
