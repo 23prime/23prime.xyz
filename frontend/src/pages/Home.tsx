@@ -1,28 +1,16 @@
+import { useTranslation } from "react-i18next";
 import { NavigationCard } from "@/components/NavigationCard";
 import { SITE_CONFIG } from "@/lib/config";
 
 const NAVIGATION_CARDS = [
-  {
-    to: "/about",
-    title: "About",
-    description: "Learn more about my background and skills",
-    buttonText: "View Profile",
-  },
-  {
-    to: "/projects",
-    title: "Projects",
-    description: "Check out my portfolio and works",
-    buttonText: "View Projects",
-  },
-  {
-    to: "/contact",
-    title: "Contact",
-    description: "Get in touch with me",
-    buttonText: "Contact Me",
-  },
+  { to: "/about", key: "about" },
+  { to: "/projects", key: "projects" },
+  { to: "/contact", key: "contact" },
 ] as const;
 
 export function Home() {
+  const { t } = useTranslation();
+
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-4xl mx-auto">
@@ -36,15 +24,21 @@ export function Home() {
             />
           </div>
           <h1 className="text-4xl font-bold mb-4">
-            {SITE_CONFIG.nickname}@{SITE_CONFIG.name}
+            {t("home.greeting", { nickname: SITE_CONFIG.nickname, name: SITE_CONFIG.name })}
           </h1>
-          <p className="text-xl text-muted-foreground">{SITE_CONFIG.title}</p>
+          <p className="text-xl text-muted-foreground">{t("home.tagline")}</p>
         </div>
 
         {/* Navigation Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {NAVIGATION_CARDS.map((card) => (
-            <NavigationCard key={card.to} {...card} />
+            <NavigationCard
+              key={card.to}
+              to={card.to}
+              title={t(`home.cards.${card.key}.title`)}
+              description={t(`home.cards.${card.key}.description`)}
+              buttonText={t(`home.cards.${card.key}.button`)}
+            />
           ))}
         </div>
       </div>

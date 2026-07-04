@@ -1,7 +1,6 @@
 export const SITE_CONFIG = {
   name: "23prime",
   nickname: "Okkey",
-  title: "Software Developer",
   profileImage: "/23prime.png",
   email: "okkey@mail.23prime.xyz",
   links: {
