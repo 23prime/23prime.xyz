@@ -24,7 +24,7 @@ zizmor = "1.26.1"
 
 # Other tools
 lefthook = "2"
-betterleaks = "1"
+betterleaks = "v1.6.1"
 
 # Frontend
 pnpm = "11"
