@@ -28,21 +28,21 @@
   },
   "home": {
     "greeting": "{{nickname}}@{{name}}",
-    "tagline": "ソフトウェアエンジニア",
+    "tagline": "Software Developer",
     "cards": {
       "about": {
         "title": "自己紹介",
-        "description": "経歴やスキルについて詳しく紹介しています",
+        "description": "経歴やスキル",
         "button": "プロフィールを見る"
       },
       "projects": {
         "title": "プロジェクト",
-        "description": "ポートフォリオや制作物を紹介しています",
+        "description": "ポートフォリオや制作物",
         "button": "プロジェクトを見る"
       },
       "contact": {
         "title": "連絡先",
-        "description": "お気軽にご連絡ください",
+        "description": "お気軽にご連絡ください！",
         "button": "連絡する"
       }
     }
@@ -51,9 +51,9 @@
     "pageTitle": "自己紹介",
     "profile": {
       "heading": "プロフィール",
-      "job": { "label": "職業", "value": "東京在住のソフトウェアエンジニア" },
+      "job": { "label": "職業", "value": "東京ソフトウェア開発を生業にしている。" },
       "from": { "label": "出身", "value": "山梨県甲府市" },
-      "anotherSky": { "label": "第二の故郷", "value": "茨城県つくば市" },
+      "anotherSky": { "label": "アナザースカイ", "value": "茨城県つくば市" },
       "hobbies": { "label": "趣味", "value": "ホルン（オーケストラ）、ゲーム、コーヒー" }
     },
     "history": {
@@ -66,11 +66,11 @@
         { "date": "2019/03", "event": "筑波大学大学院 数学教育専攻 修了（修士）" },
         {
           "date": "2019/04",
-          "event": "株式会社SATT 入社（データ分析 → Web開発 → AI研究 → ...）"
+          "event": "SATT株式会社 入社（データ分析 → Web開発 → 人工知能研究所 → ...）"
         },
         {
           "date": "2024/10",
-          "event": "【現在】技術戦略室へ異動（設立メンバー）"
+          "event": "【現在】技術戦略室へ異動（発足メンバー）"
         }
       ]
     },
@@ -81,13 +81,13 @@
       "items": [
         {
           "title": "認証基盤の開発",
-          "descriptions": ["社内Webサービス向けのOpenID Connectプロバイダーを開発。"],
+          "descriptions": ["社内 Web サービス向けの OpenID Connect プロバイダーを開発。"],
           "role": "プログラマー / SE"
         },
         {
           "title": "ICT学習システム",
           "descriptions": [
-            "大学受験対策のためのWebベース学習教材を開発。",
+            "大学受験対策のための Web ベース学習教材を開発。",
             "教員向けの指導支援システムや、スタッフ向けの管理システムも開発。"
           ],
           "role": "テックリード"
@@ -121,6 +121,6 @@
   },
   "underConstruction": {
     "message": "このページは現在準備中です。",
-    "checkBack": "近日公開予定です。しばらくお待ちください。"
+    "checkBack": "気が向いたら作ります。"
   }
 }
