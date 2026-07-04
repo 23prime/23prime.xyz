@@ -32,15 +32,6 @@ jobs:
           cache: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Workaround for https://github.com/jdx/mise-action/issues/175
-      # The asdf:terraform backend installs the binary at the root of the install dir,
-      # but mise env reports the /bin subdirectory in PATH. Create a symlink to fix this.
-      - name: Fix terraform bin path
-        run: |
-          INSTALL_DIR=$(find ~/.local/share/mise/installs/terraform -maxdepth 1 -mindepth 1 -type d | head -1)
-          mkdir -p "${INSTALL_DIR}/bin"
-          ln -sf "${INSTALL_DIR}/terraform" "${INSTALL_DIR}/bin/terraform"
-
       - name: Fix
         run: mise run infra-fmt
 
