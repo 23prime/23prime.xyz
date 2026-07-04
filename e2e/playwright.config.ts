@@ -30,6 +30,8 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || "http://localhost:5173",
     // Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer
     trace: "on-first-retry",
+    // Fix the browser locale so language-dependent assertions are deterministic across environments.
+    locale: "en-US",
   },
 
   // Configure projects for major browsers

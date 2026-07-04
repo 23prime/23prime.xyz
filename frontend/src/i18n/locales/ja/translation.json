@@ -1,0 +1,126 @@
+{
+  "header": {
+    "nav": {
+      "home": "ホーム",
+      "about": "自己紹介",
+      "projects": "プロジェクト",
+      "blog": "ブログ",
+      "contact": "連絡先"
+    },
+    "openMenu": "メニューを開く"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{name}}. All rights reserved.",
+    "repository": "📁 リポジトリ"
+  },
+  "theme": {
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システム",
+    "current": "現在のテーマ: {{label}}",
+    "toggle": "テーマを切り替え"
+  },
+  "language": {
+    "current": "現在の言語: {{label}}",
+    "toggle": "言語を切り替え",
+    "en": "英語",
+    "ja": "日本語"
+  },
+  "home": {
+    "greeting": "{{nickname}}@{{name}}",
+    "tagline": "ソフトウェアエンジニア",
+    "cards": {
+      "about": {
+        "title": "自己紹介",
+        "description": "経歴やスキルについて詳しく紹介しています",
+        "button": "プロフィールを見る"
+      },
+      "projects": {
+        "title": "プロジェクト",
+        "description": "ポートフォリオや制作物を紹介しています",
+        "button": "プロジェクトを見る"
+      },
+      "contact": {
+        "title": "連絡先",
+        "description": "お気軽にご連絡ください",
+        "button": "連絡する"
+      }
+    }
+  },
+  "about": {
+    "pageTitle": "自己紹介",
+    "profile": {
+      "heading": "プロフィール",
+      "job": { "label": "職業", "value": "東京在住のソフトウェアエンジニア" },
+      "from": { "label": "出身", "value": "山梨県甲府市" },
+      "anotherSky": { "label": "第二の故郷", "value": "茨城県つくば市" },
+      "hobbies": { "label": "趣味", "value": "ホルン（オーケストラ）、ゲーム、コーヒー" }
+    },
+    "history": {
+      "heading": "経歴",
+      "date": "年月",
+      "event": "出来事",
+      "items": [
+        { "date": "1994/01", "event": "誕生" },
+        { "date": "2017/03", "event": "筑波大学 理工学群 数学類 卒業（学士）" },
+        { "date": "2019/03", "event": "筑波大学大学院 数学教育専攻 修了（修士）" },
+        {
+          "date": "2019/04",
+          "event": "株式会社SATT 入社（データ分析 → Web開発 → AI研究 → ...）"
+        },
+        {
+          "date": "2024/10",
+          "event": "【現在】技術戦略室へ異動（設立メンバー）"
+        }
+      ]
+    },
+    "projects": {
+      "heading": "業務でのプロジェクト・プロダクト",
+      "role": "役割",
+      "visitWebsite": "サイトを見る →",
+      "items": [
+        {
+          "title": "認証基盤の開発",
+          "descriptions": ["社内Webサービス向けのOpenID Connectプロバイダーを開発。"],
+          "role": "プログラマー / SE"
+        },
+        {
+          "title": "ICT学習システム",
+          "descriptions": [
+            "大学受験対策のためのWebベース学習教材を開発。",
+            "教員向けの指導支援システムや、スタッフ向けの管理システムも開発。"
+          ],
+          "role": "テックリード"
+        }
+      ]
+    },
+    "techStack": {
+      "heading": "技術スタック",
+      "categories": {
+        "languages": "言語",
+        "webFrameworks": "Webフレームワーク",
+        "infrastructure": "インフラ",
+        "otherWebTechnologies": "その他のWeb技術",
+        "databases": "データベース",
+        "tools": "ツール",
+        "practicesAndMethodologies": "プラクティス・方法論"
+      }
+    }
+  },
+  "projects": {
+    "pageName": "プロジェクト"
+  },
+  "contact": {
+    "pageTitle": "連絡先",
+    "description": "以下のいずれかの方法でお気軽にご連絡ください。",
+    "links": {
+      "twitter": "Twitter",
+      "github": "GitHub",
+      "email": "メール"
+    }
+  },
+  "underConstruction": {
+    "message": "このページは現在準備中です。",
+    "checkBack": "近日公開予定です。しばらくお待ちください。"
+  }
+}

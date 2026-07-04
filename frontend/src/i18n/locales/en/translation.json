@@ -1,0 +1,126 @@
+{
+  "header": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "openMenu": "Open menu"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{name}}. All rights reserved.",
+    "repository": "📁 Repository"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "current": "Current theme: {{label}}",
+    "toggle": "Toggle theme"
+  },
+  "language": {
+    "current": "Current language: {{label}}",
+    "toggle": "Toggle language",
+    "en": "English",
+    "ja": "Japanese"
+  },
+  "home": {
+    "greeting": "{{nickname}}@{{name}}",
+    "tagline": "Software Developer",
+    "cards": {
+      "about": {
+        "title": "About",
+        "description": "Learn more about my background and skills",
+        "button": "View Profile"
+      },
+      "projects": {
+        "title": "Projects",
+        "description": "Check out my portfolio and works",
+        "button": "View Projects"
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Get in touch with me",
+        "button": "Contact Me"
+      }
+    }
+  },
+  "about": {
+    "pageTitle": "About Me",
+    "profile": {
+      "heading": "Profile",
+      "job": { "label": "Job", "value": "Software Developer in Tokyo" },
+      "from": { "label": "From", "value": "Kofu, Yamanashi, Japan" },
+      "anotherSky": { "label": "Another Sky", "value": "Tsukuba, Ibaraki, Japan" },
+      "hobbies": { "label": "Hobbies", "value": "French Horn (orchestra), Gaming, Coffee" }
+    },
+    "history": {
+      "heading": "History",
+      "date": "Date",
+      "event": "Event",
+      "items": [
+        { "date": "1994/01", "event": "Born" },
+        { "date": "2017/03", "event": "Bachelor’s Degree in University of Tsukuba [mathematics]" },
+        { "date": "2019/03", "event": "Master’s Degree in University of Tsukuba [mathematics education]" },
+        {
+          "date": "2019/04",
+          "event": "Joined SATT, Inc. (Data Analysis -> Web Development -> AI Research -> ...)"
+        },
+        {
+          "date": "2024/10",
+          "event": "[NOW] Transferred to The Division of Technology Strategy (founding member)"
+        }
+      ]
+    },
+    "projects": {
+      "heading": "Projects & Products at work",
+      "role": "Role",
+      "visitWebsite": "Visit Website →",
+      "items": [
+        {
+          "title": "Authentication Platform Development",
+          "descriptions": ["Developed an OpenID Connect provider for internal web services."],
+          "role": "Programmer / SE"
+        },
+        {
+          "title": "ICT Learning system",
+          "descriptions": [
+            "Developed web-based learning materials for university entrance exams.",
+            "As well as a coaching/teaching system for teachers, and management system for staffs."
+          ],
+          "role": "Tech Lead"
+        }
+      ]
+    },
+    "techStack": {
+      "heading": "Tech Stack",
+      "categories": {
+        "languages": "Languages",
+        "webFrameworks": "Web Frameworks",
+        "infrastructure": "Infrastructure",
+        "otherWebTechnologies": "Other web technologies",
+        "databases": "Databases",
+        "tools": "Tools",
+        "practicesAndMethodologies": "Practices & Methodologies"
+      }
+    }
+  },
+  "projects": {
+    "pageName": "Projects"
+  },
+  "contact": {
+    "pageTitle": "Contact",
+    "description": "Feel free to reach out to me through any of the following channels.",
+    "links": {
+      "twitter": "Twitter",
+      "github": "GitHub",
+      "email": "Email"
+    }
+  },
+  "underConstruction": {
+    "message": "This page is currently under construction.",
+    "checkBack": "Check back soon for updates!"
+  }
+}
