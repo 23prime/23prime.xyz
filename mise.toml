@@ -95,6 +95,17 @@ description = "Check for leaked secrets"
 run = "betterleaks git --redact --no-banner"
 alias = "sca"
 
+# mise lock
+[tasks.lock-fix]
+description = "Update mise.lock"
+run = "mise lock"
+alias = "lf"
+
+[tasks.lock-check]
+description = "Check mise.lock is up to date"
+run = ["mise lock", "git diff --exit-code -- mise.lock"]
+alias = "lc"
+
 # Frontend
 [tasks.fe-install]
 description = "Install frontend dependencies"
