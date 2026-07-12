@@ -4,7 +4,6 @@ import { SITE_CONFIG } from "@/lib/config";
 
 const NAVIGATION_CARDS = [
   { to: "/about", key: "about" },
-  { to: "/projects", key: "projects" },
   { to: "/contact", key: "contact" },
 ] as const;
 

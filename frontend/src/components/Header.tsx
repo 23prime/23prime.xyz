@@ -13,7 +13,6 @@ type NavItem = { to: string; labelKey: string; external?: false } | { href: stri
 const NAV_ITEMS: NavItem[] = [
   { to: "/", labelKey: "header.nav.home" },
   { to: "/about", labelKey: "header.nav.about" },
-  { to: "/projects", labelKey: "header.nav.projects" },
   { href: SITE_CONFIG.links.blog, labelKey: "header.nav.blog", external: true },
   { to: "/contact", labelKey: "header.nav.contact" },
 ];
