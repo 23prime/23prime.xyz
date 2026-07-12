@@ -3,7 +3,6 @@
     "nav": {
       "home": "ホーム",
       "about": "自己紹介",
-      "projects": "プロジェクト",
       "blog": "ブログ",
       "contact": "連絡先"
     },
@@ -34,11 +33,6 @@
         "title": "自己紹介",
         "description": "経歴やスキル",
         "button": "プロフィールを見る"
-      },
-      "projects": {
-        "title": "プロジェクト",
-        "description": "ポートフォリオや制作物",
-        "button": "プロジェクトを見る"
       },
       "contact": {
         "title": "連絡先",
@@ -74,26 +68,6 @@
         }
       ]
     },
-    "projects": {
-      "heading": "業務でのプロジェクト・プロダクト",
-      "role": "役割",
-      "visitWebsite": "サイトを見る →",
-      "items": [
-        {
-          "title": "認証基盤の開発",
-          "descriptions": ["社内 Web サービス向けの OpenID Connect プロバイダーを開発。"],
-          "role": "プログラマー / SE"
-        },
-        {
-          "title": "ICT学習システム",
-          "descriptions": [
-            "大学受験対策のための Web ベース学習教材を開発。",
-            "教員向けの指導支援システムや、スタッフ向けの管理システムも開発。"
-          ],
-          "role": "テックリード"
-        }
-      ]
-    },
     "techStack": {
       "heading": "技術スタック",
       "categories": {
@@ -106,9 +80,6 @@
         "practicesAndMethodologies": "プラクティス・方法論"
       }
     }
-  },
-  "projects": {
-    "pageName": "プロジェクト"
   },
   "contact": {
     "pageTitle": "連絡先",

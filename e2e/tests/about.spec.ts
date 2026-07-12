@@ -53,19 +53,6 @@ test.describe("About Page", () => {
     await expect(table.getByText("Bachelor’s Degree in University of Tsukuba [mathematics]")).toBeVisible();
   });
 
-  test("should display projects section", async ({ page }) => {
-    const projectsHeading = page.locator("h2").filter({ hasText: "Projects & Products at work" });
-    await expect(projectsHeading).toBeVisible();
-
-    // Check project cards are visible
-    await expect(page.getByRole("heading", { name: "Authentication Platform Development" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "ICT Learning system" })).toBeVisible();
-
-    // Check role information is displayed
-    await expect(page.getByText("Role: Programmer / SE")).toBeVisible();
-    await expect(page.getByText("Role: Tech Lead")).toBeVisible();
-  });
-
   test("should display tech stack section", async ({ page }) => {
     const techStackHeading = page.locator("h2").filter({ hasText: "Tech Stack" });
     await expect(techStackHeading).toBeVisible();

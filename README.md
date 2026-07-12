@@ -51,7 +51,6 @@ My page.
 │   │   ├── home.spec.ts
 │   │   ├── about.spec.ts
 │   │   ├── contact.spec.ts
-│   │   ├── projects.spec.ts
 │   │   ├── theme-toggle.spec.ts
 │   │   └── navigation.spec.ts
 │   ├── playwright.config.ts
@@ -215,7 +214,6 @@ This sets `BASE_URL=https://23prime.xyz` and runs tests against the live site.
 
 - `home.spec.ts` - Home page navigation and basic functionality
 - `about.spec.ts` - About page display
-- `projects.spec.ts` - Projects page display
 - `contact.spec.ts` - Contact page and external links
 - `theme-toggle.spec.ts` - Theme switching (light/dark/system)
 - `navigation.spec.ts` - SPA routing and browser navigation

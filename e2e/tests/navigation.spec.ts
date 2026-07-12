@@ -25,10 +25,6 @@ test.describe("Navigation", () => {
     await navigateToPage(page, "/about");
     await expect(page).toHaveURL(/\/about/);
 
-    // Go to Projects
-    await navigateToPage(page, "/projects");
-    await expect(page).toHaveURL(/\/projects/);
-
     // Go to Contact
     await navigateToPage(page, "/contact");
     await expect(page).toHaveURL(/\/contact/);
@@ -42,10 +38,6 @@ test.describe("Navigation", () => {
     // Direct navigation to About
     await page.goto("/about");
     await expect(page).toHaveURL(/\/about/);
-
-    // Direct navigation to Projects
-    await page.goto("/projects");
-    await expect(page).toHaveURL(/\/projects/);
 
     // Direct navigation to Contact
     await page.goto("/contact");

@@ -3,7 +3,6 @@
     "nav": {
       "home": "Home",
       "about": "About",
-      "projects": "Projects",
       "blog": "Blog",
       "contact": "Contact"
     },
@@ -34,11 +33,6 @@
         "title": "About",
         "description": "Learn more about my background and skills",
         "button": "View Profile"
-      },
-      "projects": {
-        "title": "Projects",
-        "description": "Check out my portfolio and works",
-        "button": "View Projects"
       },
       "contact": {
         "title": "Contact",
@@ -74,26 +68,6 @@
         }
       ]
     },
-    "projects": {
-      "heading": "Projects & Products at work",
-      "role": "Role",
-      "visitWebsite": "Visit Website →",
-      "items": [
-        {
-          "title": "Authentication Platform Development",
-          "descriptions": ["Developed an OpenID Connect provider for internal web services."],
-          "role": "Programmer / SE"
-        },
-        {
-          "title": "ICT Learning system",
-          "descriptions": [
-            "Developed web-based learning materials for university entrance exams.",
-            "As well as a coaching/teaching system for teachers, and management system for staffs."
-          ],
-          "role": "Tech Lead"
-        }
-      ]
-    },
     "techStack": {
       "heading": "Tech Stack",
       "categories": {
@@ -106,9 +80,6 @@
         "practicesAndMethodologies": "Practices & Methodologies"
       }
     }
-  },
-  "projects": {
-    "pageName": "Projects"
   },
   "contact": {
     "pageTitle": "Contact",

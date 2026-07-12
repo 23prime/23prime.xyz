@@ -55,12 +55,10 @@ const TECH_STACK = [
 ] as const;
 
 type HistoryItem = { date: string; event: string };
-type ProjectItem = { title: string; descriptions: string[]; role: string; link?: string };
 
 export function About() {
   const { t } = useTranslation();
   const history = t("about.history.items", { returnObjects: true }) as HistoryItem[];
-  const projects = t("about.projects.items", { returnObjects: true }) as ProjectItem[];
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -112,36 +110,6 @@ export function About() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </section>
-
-        {/* Projects */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-4">{t("about.projects.heading")}</h2>
-          <div className="space-y-4">
-            {projects.map((project) => (
-              <div key={project.title} className="border rounded-lg p-6 bg-card">
-                <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-2">
-                  {project.descriptions.map((desc, index) => (
-                    <div key={index}>{desc}</div>
-                  ))}
-                </p>
-                <p className="text-sm">
-                  <span className="font-medium">{t("about.projects.role")}:</span> {project.role}
-                </p>
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-blue-600 dark:text-blue-400 hover:underline inline-block mt-2"
-                  >
-                    {t("about.projects.visitWebsite")}
-                  </a>
-                )}
-              </div>
-            ))}
           </div>
         </section>
 

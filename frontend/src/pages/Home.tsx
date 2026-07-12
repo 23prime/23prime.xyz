@@ -4,7 +4,6 @@ import { SITE_CONFIG } from "@/lib/config";
 
 const NAVIGATION_CARDS = [
   { to: "/about", key: "about" },
-  { to: "/projects", key: "projects" },
   { to: "/contact", key: "contact" },
 ] as const;
 
@@ -30,7 +29,7 @@ export function Home() {
         </div>
 
         {/* Navigation Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {NAVIGATION_CARDS.map((card) => (
             <NavigationCard
               key={card.to}

@@ -14,7 +14,6 @@ test.describe("Header - Desktop", () => {
     // Check that navigation links are visible (use text to distinguish from logo)
     await expect(page.locator('header a:has-text("Home")')).toBeVisible();
     await expect(page.locator('header a[href="/about"]')).toBeVisible();
-    await expect(page.locator('header a[href="/projects"]')).toBeVisible();
     await expect(page.locator('header a[href="/contact"]')).toBeVisible();
   });
 
@@ -58,7 +57,6 @@ test.describe("Header - Mobile", () => {
     // Navigation links should be visible in the sheet
     await expect(sheet.locator('a[href="/"]')).toBeVisible();
     await expect(sheet.locator('a[href="/about"]')).toBeVisible();
-    await expect(sheet.locator('a[href="/projects"]')).toBeVisible();
     await expect(sheet.locator('a[href="/contact"]')).toBeVisible();
   });
 
@@ -75,17 +73,6 @@ test.describe("Header - Mobile", () => {
     await expect(page).toHaveURL(/\/about/);
 
     // Sheet should be closed after navigation
-    await expect(sheet).not.toBeVisible();
-  });
-
-  test("should navigate to Projects page from mobile menu", async ({ page }) => {
-    const menuButton = page.locator('button[aria-label="Open menu"]');
-    await menuButton.click();
-
-    const sheet = page.locator('[role="dialog"]');
-    await sheet.locator('a[href="/projects"]').click();
-
-    await expect(page).toHaveURL(/\/projects/);
     await expect(sheet).not.toBeVisible();
   });
 
