@@ -24,13 +24,13 @@ zizmor = "1.26.1"
 
 # Other tools
 lefthook = "2.1.11"
-betterleaks = "v1.7.4"
+betterleaks = "v1.8.1"
 
 # Frontend
 pnpm = "11"
 
 # Infrastructure
-"aqua:hashicorp/terraform" = "1.15.9"
+"aqua:hashicorp/terraform" = "1.16.0"
 
 
 # ================================================================

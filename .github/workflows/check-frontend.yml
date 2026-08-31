@@ -2,6 +2,8 @@ name: Check frontend
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "frontend/**"
       - ".github/workflows/check-frontend.yml"
