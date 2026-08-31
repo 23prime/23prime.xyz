@@ -91,6 +91,7 @@ const SheetDescription = React.forwardRef<
 ));
 SheetDescription.displayName = SheetPrimitive.Description.displayName;
 
+/* eslint-disable react-refresh/only-export-components */
 export {
   Sheet,
   SheetPortal,
@@ -103,3 +104,4 @@ export {
   SheetTitle,
   SheetDescription,
 };
+/* eslint-enable react-refresh/only-export-components */
