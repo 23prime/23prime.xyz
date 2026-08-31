@@ -2,6 +2,8 @@ name: Check infrastructure
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "infrastructure/**"
       - ".github/workflows/check-infrastructure.yml"
