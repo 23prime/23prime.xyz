@@ -30,7 +30,7 @@ betterleaks = "v1.8.1"
 pnpm = "11"
 
 # Infrastructure
-"aqua:hashicorp/terraform" = "1.16.0"
+"aqua:hashicorp/terraform" = "1.16.1"
 
 
 # ================================================================
