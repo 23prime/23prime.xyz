@@ -155,17 +155,17 @@ dir = "frontend"
 run = ["pnpm exec tsc -b", "pnpm lint", "pnpm format:check", "pnpm build"]
 
 [tasks.fe-lint]
-description = "Run ESLint"
+description = "Run oxlint"
 dir = "frontend"
 run = "pnpm lint"
 
 [tasks.fe-lint-fix]
-description = "Run ESLint with auto-fix"
+description = "Run oxlint with auto-fix"
 dir = "frontend"
 run = "pnpm lint --fix"
 
 [tasks.fe-fmt]
-description = "Format frontend code with Prettier"
+description = "Format frontend code with oxfmt"
 dir = "frontend"
 run = "pnpm format"
 

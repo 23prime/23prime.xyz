@@ -118,8 +118,8 @@ The application will be available at `http://localhost:5173`.
 - `mise run fe-build` - Build for production
 - `mise run fe-preview` - Preview production build
 - `mise run fe-check` - Run lint and type-check
-- `mise run fe-lint` - Run ESLint
-- `mise run fe-lint-fix` - Auto-fix ESLint issues
+- `mise run fe-lint` - Run oxlint
+- `mise run fe-lint-fix` - Auto-fix oxlint issues
 - `mise run fe-type-check` - Run TypeScript type checking
 - `mise run fe-clean` - Clean build artifacts
 
@@ -128,7 +128,7 @@ Using pnpm directly:
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production
 - `pnpm preview` - Preview production build
-- `pnpm lint` - Run ESLint
+- `pnpm lint` - Run oxlint
 
 #### Path Aliases
 

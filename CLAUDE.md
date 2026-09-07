@@ -80,7 +80,7 @@ mise run fe-build            # Build for production
 mise run fe-deps-add pkg     # Add frontend dependencies
 mise run fe-deps-add-dev pkg # Add frontend dev dependencies
 mise run fe-check            # Run linter + type-check + build
-mise run fe-lint-fix         # Auto-fix ESLint issues
+mise run fe-lint-fix         # Auto-fix oxlint issues
 mise run fe-add-component button  # Add shadcn/ui component
 ```
 

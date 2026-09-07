@@ -11,11 +11,11 @@
     "test:headed": "playwright test --headed",
     "report": "playwright show-report",
     "install:browsers": "playwright install --with-deps",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check ."
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "prettier": "^3.8.3"
+    "oxfmt": "^0.66.0"
   }
 }
