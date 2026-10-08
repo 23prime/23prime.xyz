@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { SITE_CONFIG } from "@/lib/config";
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export function Footer() {
   const { t } = useTranslation();
 
@@ -9,7 +11,7 @@ export function Footer() {
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            {t("footer.copyright", { year: new Date().getFullYear(), name: SITE_CONFIG.name })}
+            {t("footer.copyright", { year: CURRENT_YEAR, name: SITE_CONFIG.name })}
           </p>
           <div className="flex gap-4">
             <a
