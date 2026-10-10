@@ -16,6 +16,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "oxfmt": "^0.71.0"
+    "oxfmt": "^0.72.0"
   }
 }
