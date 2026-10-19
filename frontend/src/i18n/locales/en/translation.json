@@ -53,20 +53,13 @@
     },
     "history": {
       "heading": "History",
-      "date": "Date",
+      "date": "Year",
       "event": "Event",
       "items": [
-        { "date": "1994/01", "event": "Born" },
-        { "date": "2017/03", "event": "Bachelor’s Degree in University of Tsukuba [mathematics]" },
-        { "date": "2019/03", "event": "Master’s Degree in University of Tsukuba [mathematics education]" },
-        {
-          "date": "2019/04",
-          "event": "Joined SATT, Inc. (Data Analysis -> Web Development -> AI Research -> ...)"
-        },
-        {
-          "date": "2024/10",
-          "event": "[NOW] Transferred to The Division of Technology Strategy (founding member)"
-        }
+        { "date": "1994", "event": "Born" },
+        { "date": "2017", "event": "Bachelor’s Degree in University of Tsukuba [mathematics]" },
+        { "date": "2019", "event": "Master’s Degree in University of Tsukuba [mathematics education]" },
+        { "date": "2019", "event": "SATT, Inc." }
       ]
     },
     "techStack": {
