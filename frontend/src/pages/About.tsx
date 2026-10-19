@@ -78,7 +78,8 @@ export function About() {
             {PROFILE_ITEMS.map((item) => (
               <p key={item.key}>
                 <span className="font-medium">
-                  {item.icon} {t(`about.profile.${item.key}.label`)}:
+                  {item.icon} {t(`about.profile.${item.key}.label`)}
+                  {t("about.profile.colon")}
                 </span>{" "}
                 {t(`about.profile.${item.key}.value`)}{" "}
               </p>
