@@ -6,7 +6,7 @@
       "blog": "ブログ",
       "contact": "連絡先"
     },
-    "openMenu": "メニューを開く"
+    "openMenu": "メニュー"
   },
   "footer": {
     "copyright": "© {{year}} {{name}}. All rights reserved.",
@@ -45,7 +45,7 @@
     "pageTitle": "自己紹介",
     "profile": {
       "heading": "プロフィール",
-      "job": { "label": "職業", "value": "東京ソフトウェア開発を生業にしている。" },
+      "job": { "label": "職業", "value": "東京のソフトウェア屋さん" },
       "from": { "label": "出身", "value": "山梨県甲府市" },
       "anotherSky": { "label": "アナザースカイ", "value": "茨城県つくば市" },
       "hobbies": { "label": "趣味", "value": "ホルン（オーケストラ）、ゲーム、コーヒー" }
@@ -83,7 +83,7 @@
   },
   "contact": {
     "pageTitle": "連絡先",
-    "description": "以下のいずれかの方法でお気軽にご連絡ください。",
+    "description": "お気軽にご連絡ください。",
     "links": {
       "twitter": "Twitter",
       "github": "GitHub",
