@@ -80,7 +80,7 @@ export function About() {
                 <span className="font-medium">
                   {item.icon} {t(`about.profile.${item.key}.label`)}
                   {t("about.profile.colon")}
-                </span>{" "}
+                </span>
                 {t(`about.profile.${item.key}.value`)}{" "}
               </p>
             ))}

@@ -45,7 +45,7 @@
     "pageTitle": "About Me",
     "profile": {
       "heading": "Profile",
-      "colon": ":",
+      "colon": ": ",
       "job": { "label": "Job", "value": "Software Developer in Tokyo" },
       "from": { "label": "From", "value": "Kofu, Yamanashi, Japan" },
       "anotherSky": { "label": "Another Sky", "value": "Tsukuba, Ibaraki, Japan" },
