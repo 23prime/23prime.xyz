@@ -12,3 +12,6 @@ minimumReleaseAge: 4320
 strictDepBuilds: true
 
 trustPolicy: no-downgrade
+minimumReleaseAgeExclude:
+  # Renovate security update: vite@8.1.6
+  - vite@8.1.6
